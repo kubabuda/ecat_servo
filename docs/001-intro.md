@@ -1,4 +1,4 @@
-# EtherCAT servo drives for everyone
+# EtherCAT compatible servo drives for everyone
 
 I am building EtherCAT adapter for open motor controllers like ODrive, STMBL, or your next thing.
 
@@ -17,19 +17,22 @@ Legacy way of motion control in open source was to use step-dir over parallel po
 ## How it is done now (in open source and entry level motion controllers)
 
 ### LinuxCNC
+
 - Linux CNC with LPT still is viable solution for machines with few stepper motors and limited IO. All drawbacks described above apply, but for CNC router this often is enough
 - Linux CNC with Mesa cards: Mesa is company that offers line of extension cards with FPGA, targeting LinuxCNC. Bitfiles source code is open, hardware is proprietary but not expesive. There are multiple connectivity configurations for each card. First is using hardware step signal generation to overcome software stepgen limits. Much more reliable, works all right with servo drives supporting pulse-dir signals. Some cards got analog inputs and outputs and can be used to control older, voltage controlled servo amplifiers but this is really legacy solution for retrofits.
 - There is also smart serial (sserial), Mesa specific protocol for modular extensions. It uses RS422 differential transmission for fast, noise resistant communication. If you want to use STMBL servo drives to build CNC machine, this seems to be the preffered way. Problem is STMBLs are hard to buy, and those (and some Mesa servo drives) are the only devices using sserial protocol (that I know of).
 - LinuxCNC with proprietary extension cards, from vendors like yurtaev.com. These are adding support for proprietary protocols like SSCNET, MELDAS, Mechatrolink. Cards themselves are not open source, pricing is "contact us". There is no open servodrive project using these. Drives from industrial vendors like Yaskawa or Mitsubishi will do its job for years, at industrial machine prices. 
 - LCEC: LinuxCNC with EtherCAT. Software is free. Fast, modular, requires no special hardware on controller side. Generic driver probably will work on computer you already have, available drivers support commodity PCI network cards available for few dollars. This protocol seems to be industrial standard gaining more and more popularity. Servo drives and I/O are available from plenty of industrial vendors. No open source actuators ... so far.
 
-### Microcontroller based motion controllers.
+### Microcontroller based motion controllers
 
 - GRBL, GRBL ports to 32 bit MCUs (ARM, ESP32) and other 32bit MCU CNC controller projects like Smoothieboard. Using USB or Ethernet to connect to desktop running UI, outputing pulse-dir signals for stepper motors. Well known from being used in 3D printers, usually equipped with stepper motor drivers rated for small NEMA 17 sized motors, could work just as well for CNC router (when connected to external stepper drivers). Original 8bit GRBL was limited to 3 axis, its ports and competing project can support up to 6 axis. Pulse-dir signal generation should be faster and more stable than on desktop LPT, rest of limitations is similar.
 
 ### Mach
 
-- Mach 3 / Mach 4 controller using LPT port, limitations to that are described above. Mach is not open source, but is affordable PC based controller with large entry level user base.
+Mach is not open source, but is affordable PC based controller with large entry level user base
+
+- Mach 3 / Mach 4 controller using LPT port, limitations to that are described above. 
 - Mach 3 / Mach 4 with hardware controller: CSMIO, SmoothStepper. This adds hadrware pulse-dir signal generation for more reliability and enough I/O for most CNC applications.
 - Mach 4 with EtherCAT driver: several vendors are offering various solutions.
 
@@ -37,31 +40,35 @@ Legacy way of motion control in open source was to use step-dir over parallel po
 
 - Application specific protocol over CAN bus. CAN transcievers are cheap, MCUs like STM32F405 used in ODrive got CAN controllers builtin, protocol uses noise resistant transmission over differential pairs. At top speed it is fast enough for few axis at hundreds of Hz; bandwidth does not leave much room for more axis, faster control loops, or additional I/O. Cheap way but non standardized at all: seems like quadruped robot actuators have their data formats, quadcopters their own, and so on. Drawbacks: Linux supports CAN, but AFAIK are there no realtime CAN adapters for Linux available that are not in $$$s range. Cheaper options are USB to CAN adapters like CANtacts, CANable, but USB is not good for realtime required for motion control. Some projects are solving this by running realtime part on  This adds another non standard layer
 
-- CAN bus with CANopen devices. CANopen is standarization of data format for various devices commuincating over CAN bus. When it comes to motion control, device profile for servo drive over CAN bus is called CiA (CAN in Automation) 402; industrial servodrives implementing this profile are available from number of vendors. This approach would still have some of the drawbacks of using custom CAN protocols (no affordable realtime CAN adapter for PC controller, limited speed and bandwidth in comparison to Ethernet based protocols). Apparently this is not popular solution in open source.
+- CAN bus with CANopen devices. CANopen is standarization of data format for various devices commuincating over CAN bus. When it comes to motion control, device profile for servo drive over CAN bus is called CiA (CAN in Automation) 402; industrial servodrives implementing this profile are available from number of vendors. This approach would still have some of the drawbacks of using custom CAN protocols (no affordable realtime CAN adapter for PC controller, limited speed and bandwidth in comparison to Ethernet based protocols). Apparently this is not popular solution in open source, no wonder.
+
+### Summary
 
 I am sure I ommited some motion control solutions from this market segment. Let me know if I need to correct something.
 
-## How it could be done
+# How it could be done
 
-We need simple to use, low cost and powerful solution that is compatible with industry standards, but not depending only on That One Company That Had Build It. And we need to make it completely open source, so we can do with it what we want. From all the options above, solution that is nearest to this all is EtherCAT. It gives us fast controller on the cheap, plenty of I/O and actuators to choose from numerous vendors, is properly supported with LinuxCNC, has multiple open source master libraries (SOEM, EtherLab) and more. 
-And as one can already tell, this project bets on EtherCAT.
+We need simple to use, low cost and powerful solution that is compatible with industry standards, that is not totally owned by That One Company Behind It. And we need to make it completely open source, so we can do with it what we want. From all the options above, solution that is nearest to this all is EtherCAT. It gives us fast controller on the cheap, plenty of I/O and actuators to choose from numerous vendors, is properly supported with LinuxCNC, has multiple open source master libraries (SOEM, EtherLab) and more. 
 
-# What is to be done
+# What is there to be done
 
-## Motion control protocol
+## Licensing
+
+EtherCAT Technology Group (ETG) calls it open network, but it is not open as in GPL or MIT license. It means anyone can sign up to be member of ETG and get access to documentation, code samples and code generation tools, for free. It comes however with obligation not disclose any of these materials to anyone who is not member of ETG. 
+EtherCAT trademark licensing implies also that no device can be sold with EtherCAT markings if vendor offering it has no valid Conformance Testing Tool license.
+Official code stack from Beckhoff is called Slave Stack Code. Licensing on that code prohibits it from being used in open source projects. Luckily there is alternative, GPL licensed stack: SOES from Open EtherCAT Society. This means following project is going to be under GPL too.
+
+TLDR one should be good with using EtherCAT in OSS project if he use SOES, and does not sell anything marked with EtherCAT logo or name
+
+## Select motion control protocol
 
 EtherCAT itself is only data link layer. One could roll out his own protocol on top of it, but what we want is to adapt standard protocols for interoperability with devices available on the market. Most popular protocol for EtherCAT is CoE: CANopen over EtherCAT, that mirrors CANopen way of working with Object Dictionary and Protocol Data Objects, but uses EtherCAT network instead of CAN bus. For motion control over EtherCAT, it means CoE CiA402. There is alternative protocol, SERCOS over EtherCAT, which seems to be way less popular and (for new, open source projects) has no real edge over CoE CiA402 that I know of.
 
 This project will focus on CiA402, and will start by implementing its csp mode (cyclic synchronous position), as most convinient to use with CNC controllers like LinuxCNC.
 
-## Licensing, code stack
+## Get hardware
 
-EtherCAT Technology group calls it open network, but it is not open as in GPL or MIT license. Rather, it means anyone can sign up to be member of ETH and get access to documentation, code samples and tools. Licensing on that code prohibits it from being used in open source projects. Luckily there is alternative, GPL licensed stack: SOES from Open EtherCAT Society. This means following project is going to be under GPL too.
-EtherCAT trademark licensing implies also that no device can be sold with EtherCAT marking if vendor offering it has no valid Conformance Testing Tool license.
-
-## Hardware 
-
-### ESC (Ethercat Slave Controller)
+### Select ESC (Ethercat Slave Controller) chip
 
 EtherCAT does not require special hardware on controller (master) side, generic Ethernet adapter is all that is needed. On slave side, hardware support is neecessary in form of dedicated ESC chip. Well, it can be also done with FPGA and IP cores are available for purchase but I am going to leave this aside for now. 
 
@@ -71,7 +78,7 @@ EtherCAT does not require special hardware on controller (master) side, generic 
 - Recently, AX58100 from ASIX arrived on the marked. It is licensed ET1100 derivative with improvements. It supports additional IO options: SPI master, Step-Dir controller, 3 phase PWM generator, encoder interface. Its SPI PDI supports higher clock speeds, IO lines are usually 5V tolerant, and chip includes builtin Ethernet PHYs. This chip is not available through western retailers.
 - Finally, ASIX revealed AX58200: Cortex M4 based probably on Nuvoton M481W, with builtin ESC (and Ethernet PHYs). Chip is not offered by western retailers. On paper it looks like best choice for greenfield designs, but again this project aims not to be greenfield design.
 
-We will start with cheap, simple to use ESC from known brand, that is Microchip LAN9252, and we will see how it fares
+We will start with cheap, simple to use ESC from known well brand that is available from typical vendors. That is Microchip LAN9252, and we will see how it fares
 
 ### Adapter board
 
@@ -80,7 +87,13 @@ First thing to consider is which ESC interface is going to be used. CiA 402 will
 There are a few LAN 9252 dev boards with SPI exposed. There is range of official evaluation boards from Microchip. Then there is EasyCAT: third party Arduino shield with LAN9252, offered by some Italian company that offers it with simple to use code generation tool (that unfortunately is not realy CoE compatible). Same company offers also EasyCAT Pro: small, bare minimum LAN9252, even smaller than EVB-LAN9252-SPI, with form factor easier to embed into projects than Arduino shield. At 50 EUR it is pretty affordable.
 Entire point of this project is to make high performance, end to end open source motion control. Hence it will start from custom LAN9252-SPI board design 
 
-## Software, TODO list
+## Software
+
+### Select software stack
+
+Only available solution is SOES, under GPL ver. 2
+
+### TODO list
 
 Stuff I already know will be needed:
 
@@ -94,3 +107,5 @@ Stuff I already know will be needed:
 # Disclaimer
 
 The EtherCAT Technology, the trade name and logo "EtherCAT" are the intellectual property of, and protected by Beckhoff Automation GmbH.
+
+[Next: LAN9252-SPI PSB design](https://kubabuda.github.io/ecat_servo/002-lan9252-board-design)

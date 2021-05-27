@@ -29,3 +29,5 @@ Now we are ready to test. For that create new TwinCAT project, add point to poin
 And after some tweaks, it is working. Our dummy servo reports that it went exactly where controller wanted it to go.
 
 ![cia402dummytwincat](img/IMG_4655.JPG "CiA402 loopback dummy works under TwinCAT")
+
+[Next: LAN9252 PCB rev 2](https://kubabuda.github.io/ecat_servo/005-lan9252-rev2)
