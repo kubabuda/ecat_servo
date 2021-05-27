@@ -2,7 +2,7 @@
 
 This is free CiA402 CoE (CAN over EtherCAT) implementation for open motor controllers like ODrive, STMBL, or your next thing
 
-[/docs] (https://kubabuda.github.io/ecat_servo/001-intro) contain progress log with rationale on some decisions
+[docs](https://kubabuda.github.io/ecat_servo/001-intro) contain progress log with rationale on some decisions
 
 ## Disclaimer
 
