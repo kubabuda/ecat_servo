@@ -15,4 +15,5 @@ Looks good. Board came out similar to EasyCAT Pro, breakout header is compatible
 TLDR: it worked good enough for what I needed, for practical use you better wait for something better or buy EasyCAT PRO
 
 [Next: Testing LAN9252 board](https://kubabuda.github.io/ecat_servo/003-lan9252-board-tests)
+
 [Back to the table of contents](https://kubabuda.github.io/ecat_servo)
