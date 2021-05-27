@@ -31,3 +31,4 @@ And after some tweaks, it is working. Our dummy servo reports that it went exact
 ![cia402dummytwincat](img/IMG_4655.JPG "CiA402 loopback dummy works under TwinCAT")
 
 [Next: LAN9252 PCB rev 2](https://kubabuda.github.io/ecat_servo/005-lan9252-rev2)
+[Back to the table of contents](https://kubabuda.github.io/ecat_servo)

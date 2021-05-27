@@ -1,4 +1,10 @@
-## ECAT servo drive progress log
+# ECAT servo drive 
+
+This is documentation for [ECAT servo](https://github.com/kubabuda/ecat_servo), free CiA402 CoE (CAN over EtherCAT) implementation.
+
+# Progress log
+
+## Table of contents
 
 [1. Introduction, state of art, project targets](https://kubabuda.github.io/ecat_servo/001-intro)
 
@@ -13,6 +19,7 @@
 [6. AX58100 board](https://kubabuda.github.io/ecat_servo/006-ax58100-board)
 
 [7. AX58100 board rev 2](https://kubabuda.github.io/ecat_servo/007-ax58100-board-rev2)
+
 <!-- [LinuxCNC setup] -->
 
 ## Disclaimer

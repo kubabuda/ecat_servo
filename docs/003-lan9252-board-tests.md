@@ -38,8 +38,6 @@ Now it is working too
 
 [TODO] link project
 
-[Next step: make CoE stack that was selected, the SOES, work on new hardware](https://kubabuda.github.io/ecat_servo/004-lan9252-with-coe-stack)
-
 ## Known issues
 
 - Problem with OUT port. It is treated as network termination, following EtherCAT devices connected there are not detected by master.
@@ -51,3 +49,6 @@ Now it is working too
 - Cheaper RJ45 magjack connectors were found (HanRun HR911105A)
 
 TLDR: dont build this version. Yt worked good enough for my use case (single node development), but if you think of using it for anything practical buy EasyCAT PRO or wait for something better.
+
+[Next step: make CoE stack that was selected, the SOES, work on new hardware](https://kubabuda.github.io/ecat_servo/004-lan9252-with-coe-stack)
+[Back to the table of contents](https://kubabuda.github.io/ecat_servo)
