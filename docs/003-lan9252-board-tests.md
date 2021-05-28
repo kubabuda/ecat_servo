@@ -32,7 +32,7 @@ Additionally, found out that LAN9252 lines are not 5V tolerant. ESC is working w
 
 Now on to port that STM32F4 Discovery board. Built quick adapter using SPI1 pinout exposed on STMBL extension header. Problem with power supply repeats. 3V3 from EVB is not good, another USB cable just to power up ESC is needed.
 
-![lan9252spi_rev1_stm32f4disco](img/lan9252spi_rev1_stm32f4disco.JPG "LAN9252 SPI rev 1 with STM32F4 Discovery")
+![lan9252spi_rev1_stm32f4disco](img/lan9252spi_rev1_stm32f4disco.jpg "LAN9252 SPI rev 1 with STM32F4 Discovery")
 
 Now it is working too
 

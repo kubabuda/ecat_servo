@@ -2,9 +2,9 @@
 
 Starting point was [this open source project](https://github.com/yuqlid/EtherCAT_shield_v1). Stripped schematic to bare minimum, based on EVB-LAN9252-SPI. Left only SQI PDI, then minified board area. Two layers, almost all components on single side for easier assembly and embedding into target devices.
 
-![lan9252spi_rev1_top](img/lan9252rev1_top.png "LAN9252-SPI rev 1 render top")
+![lan9252spi_rev1_top](img/lan9252_rev1_top.png "LAN9252-SPI rev 1 render top")
 
-![lan9252spi_rev1_bottom](img/lan9252rev1_bottom.png "LAN9252-SPI rev 1 render bottom")
+![lan9252spi_rev1_bottom](img/lan9252_rev1_bottom.png "LAN9252-SPI rev 1 render bottom")
 
 Adapter board, first revision, straight from KiCad.
 
