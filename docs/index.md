@@ -4,8 +4,6 @@ This is documentation for [ECAT servo](https://github.com/kubabuda/ecat_servo), 
 
 # Progress log
 
-## Table of contents
-
 [1. Introduction, state of art, project targets](https://kubabuda.github.io/ecat_servo/001-intro)
 
 [2. LAN9252-SPI PSB design](https://kubabuda.github.io/ecat_servo/002-lan9252-board-design)

@@ -84,15 +84,15 @@ We will start with cheap, simple to use ESC from known well brand that is availa
 
 First thing to consider is which ESC interface is going to be used. CiA 402 will not work with just GPIO, it requires some PDI. We are limited by exposed extension ports on existing OSS-OSHW motion control projects. STMBL exposes SPI1 of STM32F405. ODrive has SPI2 from same MCU. Parallel PDI, called HBI (high bandwidth interface) in LAN9252 docs and FSMC in STM32 docs, is faster, but would eat too many already used pins. We have to make it with SPI.
 
-There are a few LAN 9252 dev boards with SPI exposed. There is range of official evaluation boards from Microchip. Then there is EasyCAT: third party Arduino shield with LAN9252, offered by some Italian company that offers it with simple to use code generation tool (that unfortunately is not realy CoE compatible). Same company offers also EasyCAT Pro: small, bare minimum LAN9252 board with SPI breakout, even smaller than EVB-LAN9252-SPI. Its form factor is easier to embed into projects than Arduino shield. At 50 EUR it is pretty affordable, and would be good place to start.
+There are a few LAN 9252 dev boards with SPI exposed. There is range of official evaluation boards from Microchip. Then there is EasyCAT: third party Arduino shield with LAN9252, made by some Italian company that offers it with simple to use code generation tool (which unfortunately is not realy CoE compatible). Same company offers also EasyCAT Pro: small, bare minimum LAN9252 board with SPI breakout, even smaller than EVB-LAN9252-SPI. Its form factor is easier to embed into projects than Arduino shield. At 50 EUR it is pretty affordable, and would be good place to start.
 
-Entire point of this project is to make high performance, end to end open source motion control. Hence it will start from custom LAN9252-SPI board design 
+Entire point of this project is to make high performance, end to end open source motion control. It will start from custom LAN9252-SPI board design 
 
 ## Software
 
 ### Select software stack
 
-Only available solution is SOES, under GPL ver. 2
+Only available open source solution is SOES, released under GPL ver. 2
 
 ### Execute TODO list
 
