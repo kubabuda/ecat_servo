@@ -1,0 +1,9 @@
+# Working with LinuxCNC
+
+LinuxCNC does not support Ethercat natively, probably due to licensing reasons. To get [EtherCAT driver](https://github.com/aschiffler/linuxcnc/) you have to build it and setup with IgH EtherLab that functions as master. To make life easier, prebuilt [OS image](https://github.com/grotius-cnc/LINUX_RTOS) can be used.
+
+Configuration:
+
+Looks like dummy servodrive is working. Time to configure Distributed Clock. We can either set `0x0980` to 0x01, to assign sync unit to PDI (and let device slave finish configuration), or do all the sync configuration on master side.
+
+[TODO] link configuration

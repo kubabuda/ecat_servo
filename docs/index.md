@@ -16,7 +16,9 @@ This is documentation for [ECAT servo](https://github.com/kubabuda/ecat_servo), 
 
 [6. AX58100 board](https://kubabuda.github.io/ecat_servo/006-ax58100-board)
 
-[7. AX58100 board rev 2](https://kubabuda.github.io/ecat_servo/007-ax58100-board-rev2)
+[7. LinuxCNC setup](https://kubabuda.github.io/ecat_servo/007-linuxcnc-setup)
+
+[8. AX58100 board rev 2](https://kubabuda.github.io/ecat_servo/008-ax58100-board-rev2)
 
 <!-- [LinuxCNC setup] -->
 
