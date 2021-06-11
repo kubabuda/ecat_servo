@@ -27,3 +27,5 @@ STMBL adapter based on that revision:
 
 ![ax58100_stmbl_bottom](img/ax58100_stmbl_bottom.jpg "AX58100 STMBL, bottom render")
 ![ax58100_stmbl_top](img/ax58100_stmbl_top.jpg "AX58100 STMBL, bottom render")
+
+[Back to the table of contents](https://kubabuda.github.io/ecat_servo)

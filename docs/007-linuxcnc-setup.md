@@ -7,3 +7,7 @@ Configuration:
 Looks like dummy servodrive is working. Time to configure Distributed Clock. We can either set `0x0980` to 0x01, to assign sync unit to PDI (and let device slave finish configuration), or do all the sync configuration on master side.
 
 [TODO] link configuration
+
+[Back to the table of contents](https://kubabuda.github.io/ecat_servo)
+
+[Next: AX58100 rev 2, STMBL adapter](https://kubabuda.github.io/ecat_servo/008-ax58100-board-rev2)
