@@ -1,6 +1,6 @@
 # AX58100 board rev 2
 
-Again, long laundry list of bugs and missing features on current HW was found:
+Again, laundry list of bugs and missing features on current HW was found:
 
 - Port silkscreen labels are reversed, of course. Just compare PCB renders and photos with stickers on RJ45s
 - Switch to 4 layer PCB for better noise protection and simplified, cleaner routing 
@@ -9,11 +9,16 @@ Again, long laundry list of bugs and missing features on current HW was found:
 - adapter for target device, like STMBL, will be needed (with 5V -> 3V adapter and SWD connector for STM32)
 - I2C resistors can be 4K7 to simplify BOM
 - Add 4K7 pullup resistor to ESC_FUNC pin 
-- ESD protection chip for RJ45 connectors
 - ditch RESET button, or use more common footprint
 - rework board layout: RJ45 should be side to side for easier housing design, chassis clearance is to be improved
-- maybe: add EEP_LOADED and ERR status LEDs
-- ... 
+
+Things that would be nice but wont make it on such small board:
+
+- EEP_LOADED and ERR status LEDs
+- ESD protection chip for RJ45 connectors
+
+![ax58100_rev2_bottom](img/ax58100_rev2_bottom.jpg "AX58100 rev 2, bottom render")
+![ax58100_rev2_top](img/ax58100_rev2_top.jpg "AX58100 rev 2, bottom render")
 
 [TODO] send to ASIX engineers for review
 [TODO] get PCBA quotes from LCSC, PCBWay
