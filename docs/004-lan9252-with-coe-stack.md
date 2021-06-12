@@ -33,6 +33,14 @@ Measured is how long does polled `ecat_slv();` take from start to return. No int
 
 Results are... not great for LAN9252 with CoE stack. It was okay with EasyCAT library, but something with SOES setup makes it much slower, and to make things worse timing is not consistent. Considering app notes from Microchip on measuring cycle time (with Slave Stack Code from Beckhoff) this should look way better, and deserves proper investigation.
 
+# SOES as Arduino library
+
+Turns out it was not much work to port SOES as Arduino library.
+
+[Sample project using popular STM32F103 "BluePill" devboard](https://github.com/kubabuda/ecat_servo/blob/master/examples/SOES_arduino)
+
+![lan9252_rev1_stm32f1_bluepill](img/lan9252_rev1_stm32f1_bluepill.jpg "STM32F103 BluePill with LAN9252")
+
 # CiA402 profile implementation
 
 First step is to get CiA 402 state machine diagram, for example from datasheet of some servodrive implementing it. [Hiwin has it described well](https://hiwin.us/wp-content/uploads/ethercat_drive_user_guide.pdf) . From this we can calculate commandword masks, command codes for each transition, statusword masks and status codes for each state. Here goes resulting transition table:
