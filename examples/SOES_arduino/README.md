@@ -17,6 +17,9 @@ STM32F103 BluePill
 | MISO |  PA6      | MISO | D9      |
 | MOSI |  PA7      | MOSI | D1/SIO1 |
 
-# TODO
+# Benchmark
 
-- Benchmark speed
+- Cables connected, ECAT master not connected: `[ESC benchmark] 226 us (391 top)`
+- ECAT master connected, slv in OP: `[ESC benchmark] 581 us (2393 top) [ESC benchmark] 943 us (2393 top)`
+
+Good enough for sensor or dummy servodrive, looks like not enough for real life motion control usage.

@@ -17,14 +17,19 @@ Measured is PDI communication cycle time (`EASYCAT.MainTask();`) from start to r
 
 ## SOES
 
-Measured is how long does polled `ecat_slv();` take from start to return. No interrupts, should be more deterministic and consistent. STM32F405 at 168 MHz
+Measured is how long does polled `ecat_slv();` take from start to return. No interrupts, should be more deterministic and consistent. 
 
 ### LAN9252
 
-SPI1 at 42 MHz
+STM32F405 at 168 MHz, SPI1 at 42 MHz, SPL driver
 
 - Cables connected, ECAT master not connected: `[ESC benchmark] 0028 us (028 top)`
 - ECAT master connected, slv in OP: `[ESC benchmark] 0072 us (0280 top)`
+
+STM32F103 SPI1 at 18 MHz, Arduino driver
+
+- Cables connected, ECAT master not connected: `[ESC benchmark] 226 us (391 top)`
+- ECAT master connected, slv in OP: `[ESC benchmark] 581 us (2393 top) [ESC benchmark] 943 us (2393 top)`
 
 ### AX58100
 
