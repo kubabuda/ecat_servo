@@ -1,4 +1,8 @@
-# Using LAN9252 EtherCAT board with SPI, with PlatformIO
+# SOES on STM32
+
+This is example project using SOES with LAN9252 and STM32F4
+
+## LAN9252 EtherCAT board with STM32F4 over SPI
 
 ## MCU pinout
 

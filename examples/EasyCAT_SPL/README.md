@@ -1,4 +1,8 @@
-# Using EasyCAT (LAN9252 EtherCAT board with SPI) with PlatformIO
+# EasyCAT on STM32F4
+
+# Using EasyCAT (LAN9252 EtherCAT board with SPI) library without Arduino
+
+This is EasyCAT project with PDI code (SPI reads/writes to LAN9252 ESC) using StdPeriph drivers instead of Arduino
 
 ## MCU pinout
 
@@ -39,9 +43,11 @@ STMBL is using SPI1 alternative functions
 - reading one indirect access register takes ~ 25us, in loop slave needs to read 2. Not great.
 
 ### Debug configuration
+
 - Devkit board without reset line exposed, cannot use F4 Disco which is setting `reset_config srst_only` so cloned .json definition and changed `openocd_target`
 
 # Benchmarking 
+
 Measured is PDI communication cycle time (`EASYCAT.MainTask();`) on CiA DS402 PDOs. That is 6B each - RxPDO { uint16t; int32_t }; RxPDO { uint16t; int32_t }
 
 | ESC     | SSC       | MCU     | SPI driver | SPI speed | value [us] |

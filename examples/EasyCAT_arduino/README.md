@@ -1,7 +1,14 @@
-# Using EasyCAT (LAN9252 EtherCAT board with SPI) with PlatformIO
+# EasyCAT with PlatformIO
+
+## Using LAN9252 EtherCAT board with SPI with AVR and STM32 
+
+This is EasyCAT project with PDI code (SPI reads/writes to LAN9252 ESC) separated for easier SPI drivers swap.
+It will work on Atmega 328 as well as on STM32F4
 
 ## MCU pinout
+
 ### ecat devkit F407ZG
+
 Devkit board uses SPI1 default pinout:
 
 | SPI1 | STM32 pin | LAN9252 |
@@ -22,8 +29,8 @@ Devkit board uses SPI1 default pinout:
 
 # Status
 
-- AVR Arduino - everything works just fine (even tho ATmega was working on 5V and LAN9252 is not 5V tolerant, 3.6V max)
-- port to STM32Duino and launch on STM32F407Z-LAN9252 devkit. Configuring, TxPDOs are working with simple explorer
+- AVR Arduino - everything works just fine (even tho ATmega was working on 5V and LAN9252 is not 5V tolerant, 3.6V max), obviously this is not recommended - use voltage levels shifter between AVR and LAN252.
+- port to STM32Duino is working too
 
 # Results - benchmarks
 

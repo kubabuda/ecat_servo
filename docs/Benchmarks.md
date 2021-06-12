@@ -13,15 +13,13 @@ Measured is PDI communication cycle time (`EASYCAT.MainTask();`) on CiA DS402 PD
 | LAN9252 | EasyCAT   | STM32F4 |  SPL       | 42000000  | 123        | SPI prescaler 16
 | LAN9252 | EasyCAT   | STM32F4 |  SPL       | 42000000  | 35         | SPI prescaler 2
 
-| LAN9252 | EasyCAT   | STM32F1 |            |           |            | SPI prescaler 2
-
 ## SOES
 
-What is measured: polled `ecat_slv()`, results are spewn on serial port. No interrupts, should be more deterministic and consistent
+What is measured: polled `ecat_slv()`, results are spewn on serial port. No interrupts, should be more deterministic and consistent. STM32F405 at 168 MHz
 
 ### LAN9252
 
-STM32F407 at 168 MHz, SPI1 at 42 MHz
+SPI1 at 42 MHz
 
 - Cables connected, ECAT master not connected: `[ESC benchmark] 0028 us (028 top)`
 - ECAT master connected, slv in OP: `[ESC benchmark] 0072 us (0280 top)`
