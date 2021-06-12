@@ -1,0 +1,41 @@
+{
+  "build": {
+    "core": "stm32",
+    "cpu": "cortex-m4",
+    "extra_flags": "-DSTM32F4 -DSTM32F407xx -DSTM32F40_41xxx -DARDUINO_STM32DiscoveryF407 -DBOARD_discovery_f4",
+    "f_cpu": "168000000L",
+    "ldscript": "stm32f405x6.ld",
+    "mcu": "stm32f407zgt6",
+    "variant": "DISCO_F407VG"
+  },
+  "debug": {
+    "default_tools": [
+      "stlink"
+    ],
+    "jlink_device": "STM32F407VG",
+    "openocd_target": "stm32f4x",
+    "svd_path": "STM32F40x.svd"
+  },
+  "frameworks": [
+    "arduino",
+    "mbed",
+    "cmsis",
+    "spl",
+    "libopencm3",
+    "stm32cube"
+  ],
+  "name": "ST STM32F4DISCOVERY",
+  "upload": {
+    "maximum_ram_size": 196608,
+    "maximum_size": 1048576,
+    "protocol": "stlink",
+    "protocols": [
+      "jlink",
+      "stlink",
+      "blackmagic",
+      "mbed"
+    ]
+  },
+  "url": "http://www.st.com/web/catalog/tools/FM116/SC959/SS1532/LN1848/PF252419",
+  "vendor": "ST"
+}

@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<EtherCATInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="EtherCATInfo.xsd" Version="1.6">
+
+
+<!--*************************************************************************************** -->
+<!--                                                                                        -->
+<!-- AB&T Tecnologie Informatiche - Ivrea Italy                                             -->
+<!-- http://www.bausano.net                                                                 -->
+<!-- https://www.ethercat.org/en/products/791FFAA126AD43859920EA64384AD4FD.htm              -->
+<!--                                                                                        -->
+<!--*************************************************************************************** -->
+                                                                                       
+<!--*************************************************************************************** -->   
+<!--                                                                                        -->
+<!-- This software is distributed as an example, "AS IS", in the hope that it could         -->
+<!-- be useful, WITHOUT ANY WARRANTY of any kind, express or implied, included, but         -->
+<!-- not limited,  to the warranties of merchantability, fitness for a particular           -->
+<!-- purpose, and non infringiment. In no event shall the authors be liable for any         -->    
+<!-- claim damages or other liability, arising from, or in connection with this software.   -->
+<!--                                                                                        -->
+<!--*************************************************************************************** --> 
+
+
+<!-- ************************************************************************************** --> 
+<!--                                                                                        --> 
+<!--     This file has been created by the EasyCAT configuration tool                       -->       
+<!--                                                                                        --> 
+<!--     Easy Configurator project DS402_PDOs_EasyCatProject.prj                                              -->       
+<!--                                                                                        --> 
+<!-- ************************************************************************************** --> 
+
+
+
+	<Vendor>
+		<Id>#x0000079A</Id> 
+	  	<Name>AB&T</Name>  
+	    <ImageData16x14>424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e000000000000000000004cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb1224cb122ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff241cedffffff241cedffffff241ced241cedffffffffffffffffff241ced241ced241cedffffff241cedffffffffffff241cedffffff241cedffffff241cedffffff241cedffffff241cedffffff241cedffffffffffff241cedffffffffffff241cedffffff241cedffffff241cedffffff241cedffffff241cedffffff241cedffffffffffff241cedffffffffffff241cedffffff241cedffffff241cedffffff241cedffffffffffff241cedffffffffffffffffff241cedffffffffffff241ced241ced241cedffffff241ced241cedffffffffffff241cedffffff241cedffffffffffff241cedffffffffffff241cedffffff241cedffffff241cedffffff241cedffffff241cedffffff241cedffffffffffff241cedffffffffffff241cedffffff241cedffffff241cedffffff241cedffffffffffff241cedffffffffffffffffff241cedffffffffffff241cedffffff241cedffffff241cedffffff241cedffffffffffffffffffffffffffffffffffff241cedffffffffffffffffff241cedffffffffffffffffff241cedffffffffffffffffffffffffffffffffffff241ced241ced241cedffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</ImageData16x14>
+	</Vendor> 
+  <Descriptions>
+    <Groups>
+      <Group SortOrder="0">
+        <Type>SSC_Device</Type>
+        <Name LcId="1033">EasyCAT</Name>
+        <ImageData16x14>424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000241ced241ced241ced241cedffffff241cedffffffffffffffffff241cedffffffffffffffffff241cedffffffffffff241cedffffffffffffffffffffffff241cedffffffffffffffffff241cedffffffffffffffffff241cedffffffffffff241cedffffffffffffffffffffffff241ced241ced241ced241ced241cedffffffffffffffffff241cedffffffffffff241cedffffffffffffffffffffffff241cedffffffffffffffffff241cedffffffffffffffffff241cedffffffffffff241cedffffffffffffffffffffffff241ced241cedffffff241ced241cedffffff241cedffffff241cedffffff241ced241ced241ced241ced241cedffffffffffff241ced241ced241cedffffffffffff241ced241ced241ced241ced241cedffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff241ced241ced241cedffffffffffff241ced241ced241cedffffff241ced241ced241cedffffff241ced241ced241ced241cedffffffffffffffffff241cedffffffffffff241cedffffffffffffffffff241cedffffffffffffffffff241ced241cedffffffffffffffffffffffff241ced241cedffffffffffff241ced241ced241cedffffff241ced241ced241ced241ced241cedffffffffffffffffffffffffffffff241cedffffff241cedffffffffffffffffff241cedffffff241ced241cedffffffffffffffffffffffff241ced241ced241cedffffff241ced241ced241cedffffff241cedffffff241ced241cedffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff241ced241ced241cedffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</ImageData16x14>
+      </Group>
+    </Groups>
+    <Devices>
+
+<!-- ************************************************************************************** --> 
+<!--                                                                                        --> 
+<!--     Custom device                                                                      -->       
+<!--                                                                                        --> 
+<!-- ************************************************************************************** -->   
+
+      <Device Physics="YY">
+        <Type ProductCode="#xABE00001" RevisionNo="#x00000001" CheckRevisionNo="EQ_OR_G">DS402_PDOs</Type>
+        <Name LcId="1033"><![CDATA[DS402_PDOs]]></Name>        
+        <GroupType>SSC_Device</GroupType>
+        <Fmmu>Outputs</Fmmu>
+        <Fmmu>Inputs</Fmmu>
+       
+	    <!-- output base physical address -->       
+        <Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
+
+		<!-- input base physical address -->             
+        <Sm StartAddress="#x1200" ControlByte="#x20" Enable="1">Inputs</Sm>
+
+<!-- ***************** output PDO ********************************************************** --> 
+ 
+        <RxPdo Fixed="1" Mandatory="1" Sm="0">
+          <Index>#x1600</Index>
+          <Name>Outputs</Name>
+          <Entry>
+            <Index>#x5</Index>
+            <SubIndex>1</SubIndex>
+            <BitLen>32</BitLen>
+            <Name>Position_0x607A</Name>
+            <DataType>DINT</DataType>
+          </Entry>
+          <Entry>
+            <Index>#x5</Index>
+            <SubIndex>2</SubIndex>
+            <BitLen>16</BitLen>
+            <Name>ControlWord_0x6040</Name>
+            <DataType>UINT</DataType>
+          </Entry>
+        </RxPdo>          
+        
+<!-- ***************** input PDO *********************************************************** -->
+ 
+        <TxPdo Fixed="1" Mandatory="1" Sm="1">
+          <Index>#x1A00</Index>
+          <Name>Inputs</Name>
+          <Entry>
+            <Index>#x6</Index>
+            <SubIndex>1</SubIndex>
+            <BitLen>32</BitLen>
+            <Name>ActualPosition_0x6064</Name>
+            <DataType>DINT</DataType>
+          </Entry>
+          <Entry>
+            <Index>#x6</Index>
+            <SubIndex>2</SubIndex>
+            <BitLen>16</BitLen>
+            <Name>StatusWord_0x6041</Name>
+            <DataType>UINT</DataType>
+          </Entry>
+        </TxPdo>
+
+<!-- ***************** Synchronization ***************************************************** -->
+        
+		<Dc>                                                        <!-- DC not used(default)--> 
+			<OpMode>                                          
+				<Name>SM_Sync or Async</Name>
+				<Desc>SM_Sync or Async</Desc>            
+				<AssignActivate>#x0000</AssignActivate>
+			</OpMode>
+  
+			<OpMode>                                                <!-- DC used             --> 
+				<Name>DC_Sync</Name>
+				<Desc>DC_Sync</Desc>               
+				<AssignActivate>#x300</AssignActivate>
+				<CycleTimeSync0 Factor="1">0</CycleTimeSync0>
+				<ShiftTimeSync0>2000200000</ShiftTimeSync0>         <!-- 10nS unit           --> 
+			</OpMode>
+		</Dc>       
+  
+<!-- *************************************************************************************** -->
+
+        <Eeprom>
+          <ByteSize>4096</ByteSize>                  
+          <ConfigData>8003006EFF00FF000000</ConfigData> 
+                                                 <!-- 0x140   0x80 PDI type LAN9252 Spi      -->  
+                                           
+                                                 <!-- 0x141   0x03 device emulation          -->
+                                                 <!--         enhanced link detection        -->  
+                                           
+                                                 <!-- 0x150   0x00 not used for LAN9252 Spi  -->
+                                           
+                                                 <!-- 0x151   0x6E map Sync0 to AL event     -->
+                                                 <!--         Sync0/Latch0 assigned to Sync0 -->
+                                                 <!--         Sync1/Latch1 assigned to Sync1 -->
+                                                 <!--         Sync0/1 push/pull active high  -->                                           
+                                                                                      
+                                                 <!-- 0x982-3 0x00FF Sync0/1 lenght = 2.5uS  -->         
+                                                       
+                                                 <!-- 0x152   0xFF all GPIO set to out       -->
+                                                 <!-- 0x153   0x00 reserved                  -->    
+                                           
+                                                 <!-- 0x12-13 0x0000 alias address           -->                                        
+        </Eeprom>    
+      </Device>          
+    </Devices>
+  </Descriptions>
+</EtherCATInfo>  

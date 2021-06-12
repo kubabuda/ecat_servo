@@ -1,0 +1,27 @@
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+EASYCAT	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+Init	KEYWORD2
+MainTask	KEYWORD2
+Init	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+BufferOut	LITERAL1
+BufferIn	LITERAL1
+
+Cust	LITERAL1
+CUSTOM	LITERAL1
+NORT	LITERAL1
+BYTE_NUM	LITERAL1
+CUST_BYTE_NUM_IN	LITERAL1
+CUST_BYTE_NUM_OUT	LITERAL1
