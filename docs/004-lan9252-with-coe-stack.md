@@ -51,11 +51,21 @@ Then just retype these codes into .c header, connect it to get state machine cod
 
 [CiA402 dummy on STM32F1](https://github.com/kubabuda/ecat_servo/blob/master/examples/SOES_arduino)
 
-Now we are ready to test. For that create new TwinCAT project, add point to point motion control with single axis, scan for boxes and select our new device in axis settings
+# TwinCAT configuration
 
-[TODO] prepare LICEcap gif
+Way to test if node implementation is working is maing it work with TwinCAT. For that one needs to create project, and add point to point motion control with single axis. Connect device, scan for boxes and select new device in axis settings.
 
-And after some tweaks, it is working. Our dummy servo reports that it went exactly where controller wanted it to go.
+![twincat_add_axis](img/twincat_add_axis.gif "Add new CiA402 axis in TwinCAT")
+
+To launch project, one needs to enable configuration. If it is first time, fill captcha in prompt window to generate temporary license key for NC module
+
+![twincat_enable_configuration](img/twincat_enable_configuration.gif "Activate project with NC motion control in TwinCAT")
+
+Configuration should be now active and new device should reach OP (Operational state of EtherCAT state machine). Now it is time to set target velocity and enable controller. Go to `Online` tab to do it. Then reset errors (F8 key or blue button), and activate axis (F5 or green button). 
+
+![twincat_activate_axis](img/twincat_activate_axis.gif "Activate CiA402 axis in TwinCAT and test position setting")
+
+This is how it should look like. Dummy servo responds to commands, and reports it went exactly where controller requested.
 
 ![cia402dummytwincat](img/cia402dummytwincat.jpg "CiA402 loopback dummy works under TwinCAT")
 
