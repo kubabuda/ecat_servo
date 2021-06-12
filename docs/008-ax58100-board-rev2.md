@@ -12,20 +12,17 @@ Again, laundry list of bugs and missing features on current HW was found:
 - ditch RESET button, or use more common footprint
 - rework board layout: RJ45 should be side to side for easier housing design, chassis clearance is to be improved
 
-Things that would be nice but wont make it on such small board:
+Things that would be nice for next revision:
 
-- EEP_LOADED and ERR status LEDs
-- ESD protection chip for RJ45 connectors
+- EEP_LOADED and ERR status LEDs: get them on such small board
+- ESD protection chip for RJ45 connectors: source anything good and available
 
-![ax58100_rev2_bottom](img/ax58100_rev2_bottom.jpg "AX58100 rev 2, bottom render")
 ![ax58100_rev2_top](img/ax58100_rev2_top.jpg "AX58100 rev 2, bottom render")
-
-[TODO] send to ASIX engineers for review
-[TODO] get PCBA quotes from LCSC, PCBWay
+![ax58100_rev2_bottom](img/ax58100_rev2_bottom.jpg "AX58100 rev 2, bottom render")
 
 STMBL adapter based on that revision:
 
-![ax58100_stmbl_bottom](img/ax58100_stmbl_bottom.jpg "AX58100 STMBL, bottom render")
 ![ax58100_stmbl_top](img/ax58100_stmbl_top.jpg "AX58100 STMBL, bottom render")
+![ax58100_stmbl_bottom](img/ax58100_stmbl_bottom.jpg "AX58100 STMBL, bottom render")
 
 [Back to the table of contents](https://kubabuda.github.io/ecat_servo)
