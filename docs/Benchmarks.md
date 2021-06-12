@@ -1,8 +1,10 @@
 # Benchmarking 
 
+Data format on all benchmarks is CiA DS402 PDOs. That is 6B each - RxPDO { uint16t; int32_t }; RxPDO { uint16t; int32_t }
+
 ## EasyCAT
 
-Measured is PDI communication cycle time (`EASYCAT.MainTask();`) on CiA DS402 PDOs. That is 6B each - RxPDO { uint16t; int32_t }; RxPDO { uint16t; int32_t }
+Measured is PDI communication cycle time (`EASYCAT.MainTask();`) from start to return.
 
 | ESC     | SSC       | MCU     | SPI driver | SPI speed | value [us] |
 | ------- | --------- |:-------:|:----------:|:---------:|:----------:|
@@ -15,7 +17,7 @@ Measured is PDI communication cycle time (`EASYCAT.MainTask();`) on CiA DS402 PD
 
 ## SOES
 
-What is measured: polled `ecat_slv()`, results are spewn on serial port. No interrupts, should be more deterministic and consistent. STM32F405 at 168 MHz
+Measured is how long does polled `ecat_slv();` take from start to return. No interrupts, should be more deterministic and consistent. STM32F405 at 168 MHz
 
 ### LAN9252
 

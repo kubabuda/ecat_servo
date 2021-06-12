@@ -10,7 +10,26 @@ And example application is running on custom device. Great.
 
 We already know PDOs size. RxPDO (command from master to servodrive) will be `uint16_t` controlword + `uint32_t` position command, TxPDO (feedback from our servo device) is the same size: `uint16_t` statusword, `uint32_t` position actual, so it is 6 bytes in, 6 bytes out. We can set it in EasyCAT and see how long does it take to cycle. Then we can do tweak PDOs in SOES project, and test speed the same way.
 
-[TODO] paste benchmark results
+## EasyCAT
+
+Measured is PDI communication cycle time (`EASYCAT.MainTask();`) from start to return.
+
+| ESC     | SSC       | MCU     | SPI driver | SPI speed | value [us] |
+| ------- | --------- |:-------:|:----------:|:---------:|:----------:|
+| LAN9252 | EasyCAT   | AtM328P |  Arduino   | 8000000   | 196        |
+| LAN9252 | EasyCAT   | STM32F4 |  Arduino   | 8000000   | 210        |
+| LAN9252 | EasyCAT   | STM32F4 |  Arduino   | 42000000  | 118        |
+| LAN9252 | EasyCAT   | STM32F4 |  Arduino   | 42000000  | 107        |
+| LAN9252 | EasyCAT   | STM32F4 |  SPL       | 42000000  | 123        | SPI prescaler 16
+| LAN9252 | EasyCAT   | STM32F4 |  SPL       | 42000000  | 35         | SPI prescaler 2
+
+## SOES
+
+Measured is how long does polled `ecat_slv();` take from start to return. No interrupts, should be more deterministic and consistent. STM32F405 at 168 MHz. SPI1 at 42 MHz
+
+- Cables connected, ECAT master not connected: `[ESC benchmark] 0028 us (028 top)`
+- ECAT master connected, slv in OP: `[ESC benchmark] 0072 us (0280 top)`
+
 
 Results are... not great for LAN9252 with CoE stack. It was okay with EasyCAT library, but something with SOES setup makes it much slower, and to make things worse timing is not consistent. Considering app notes from Microchip on measuring cycle time (with Slave Stack Code from Beckhoff) this should look way better, and deserves proper investigation.
 
