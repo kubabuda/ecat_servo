@@ -238,7 +238,7 @@ uint32_t ESC_enable_DC ()
 
    // check Sync Unit assign 0x0980:0 ( 0 for ECAT, 1 for PDI )
    ESC_read (ESCREG_CYCLIC_UNIT_CONTROL, &data, sizeof(data));
-   if ((data & SYNC_OUT_UNIT_CONTROL_MASK) == SYNC_OUT_PDI_CONTROL) {
+   if (data == SYNC_OUT_PDI_CONTROL) {
       // Sync Unit assigned to PDI, configuration needs to be finished by slave
    
       // set sync start time: read system time, add offset for writing start time and activation
