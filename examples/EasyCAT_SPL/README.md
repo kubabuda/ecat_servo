@@ -56,7 +56,5 @@ Measured is PDI communication cycle time (`EASYCAT.MainTask();`) on CiA DS402 PD
 | LAN9252 | EasyCAT   | STM32F4 |  Arduino   | 8000000   | 210        |
 | LAN9252 | EasyCAT   | STM32F4 |  Arduino   | 42000000  | 118        |
 | LAN9252 | EasyCAT.c | STM32F4 |  Arduino   | 42000000  | 107        |
-| LAN9252 | EasyCAT   | STM32F4 |  SPL       | 42000000  | 123        | SPI prescaler 16
+| LAN9252 | EasyCAT   | STM32F4 |  SPL       | 5250000   | 123        | SPI prescaler 16
 | LAN9252 | EasyCAT   | STM32F4 |  SPL       | 42000000  | 35         | SPI prescaler 2
-
-Reading/writing PDOs is only part of that EasyCAT_MainTask has elapsed 53 us (from 109 overall length @EasyCAT.c with Arduino and software timers for benchmark) before it gets to PDO I/O - this is how long indirect register reading takes.

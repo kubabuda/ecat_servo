@@ -6,7 +6,7 @@ This is documentation for [ECAT servo](https://github.com/kubabuda/ecat_servo), 
 
 [1. Introduction, state of art, project targets](https://kubabuda.github.io/ecat_servo/001-intro)
 
-[2. LAN9252-SPI PSB design](https://kubabuda.github.io/ecat_servo/002-lan9252-board-design)
+[2. LAN9252-SPI PCB design](https://kubabuda.github.io/ecat_servo/002-lan9252-board-design)
 
 [3. Testing LAN9252 board](https://kubabuda.github.io/ecat_servo/003-lan9252-board-tests)
 
@@ -19,8 +19,6 @@ This is documentation for [ECAT servo](https://github.com/kubabuda/ecat_servo), 
 [7. LinuxCNC setup](https://kubabuda.github.io/ecat_servo/007-linuxcnc-setup)
 
 [8. AX58100 board rev 2](https://kubabuda.github.io/ecat_servo/008-ax58100-board-rev2)
-
-<!-- [LinuxCNC setup] -->
 
 ## Disclaimer
 

@@ -8,7 +8,7 @@ And example application is running on custom device. Great.
 
 # Speed benchmarking
 
-We already know PDOs size. RxPDO (command from master to servodrive) will be `uint16_t` controlword + `uint32_t` position command, TxPDO (feedback from our servo device) is the same size: `uint16_t` statusword, `uint32_t` position actual, so it is 6 bytes in, 6 bytes out. We can set it in EasyCAT and see how long does it take to cycle. Then we can do tweak PDOs in SOES project, and test speed the same way.
+We already know PDOs size. RxPDO (command from master to servodrive) will be `uint16_t` controlword + `uint32_t` position command, TxPDO (feedback from our servo device) is the same size: `uint16_t` statusword, `uint32_t` position actual, so it is 6 bytes in, 6 bytes out. We can set it in EasyCAT and see how long does it take to cycle. Then we can tweak PDOs in SOES project, and test speed the same way.
 
 ## EasyCAT
 
@@ -16,12 +16,12 @@ Measured is PDI communication cycle time (`EASYCAT.MainTask();`) from start to r
 
 | ESC     | SSC       | MCU     | SPI driver | SPI speed | value [us] |
 | ------- | --------- |:-------:|:----------:|:---------:|:----------:|
-| LAN9252 | EasyCAT   | AtM328P |  Arduino   | 8000000   | 196        |
-| LAN9252 | EasyCAT   | STM32F4 |  Arduino   | 8000000   | 210        |
-| LAN9252 | EasyCAT   | STM32F4 |  Arduino   | 42000000  | 118        |
-| LAN9252 | EasyCAT   | STM32F4 |  Arduino   | 42000000  | 107        |
-| LAN9252 | EasyCAT   | STM32F4 |  SPL       | 42000000  | 123        | SPI prescaler 16
-| LAN9252 | EasyCAT   | STM32F4 |  SPL       | 42000000  | 35         | SPI prescaler 2
+| LAN9252 | EasyCAT   | AtM328P |  Arduino   | 8 MHz     | 196        |
+| LAN9252 | EasyCAT   | STM32F4 |  Arduino   | 8 MHz     | 210        |
+| LAN9252 | EasyCAT   | STM32F4 |  Arduino   | 42 MHz    | 118        |
+| LAN9252 | EasyCAT   | STM32F4 |  Arduino   | 42 MHz    | 107        |
+| LAN9252 | EasyCAT   | STM32F4 |  SPL       | 5.25 MHz  | 123        |
+| LAN9252 | EasyCAT   | STM32F4 |  SPL       | 42 MHz    | 35         |
 
 ## SOES
 
@@ -35,7 +35,7 @@ Results are... not great for LAN9252 with CoE stack. It was okay with EasyCAT li
 
 # SOES as Arduino library
 
-Turns out it was not much work to port SOES as Arduino library.
+At this point it is not much work to port SOES as Arduino library.
 
 [Sample project using popular STM32F103 "BluePill" devboard](https://github.com/kubabuda/ecat_servo/blob/master/examples/SOES_arduino)
 
@@ -43,7 +43,7 @@ Turns out it was not much work to port SOES as Arduino library.
 
 # CiA402 profile implementation
 
-First step is to get CiA 402 state machine diagram, for example from datasheet of some servodrive implementing it. [Hiwin has it described well](https://hiwin.us/wp-content/uploads/ethercat_drive_user_guide.pdf) . From this we can calculate commandword masks, command codes for each transition, statusword masks and status codes for each state. Here goes resulting transition table:
+First step is to get CiA 402 state machine diagram, for example from datasheet of some servodrive implementing it. [Hiwin has it described well](https://hiwin.us/wp-content/uploads/ethercat_drive_user_guide.pdf) . From this one can calculate commandword masks, command codes for each transition, statusword masks and status codes for each state. Here goes resulting transition table:
 
 ![cia402_transition_table](img/cia402_transition_table.jpg "CiA402 transition table")
 

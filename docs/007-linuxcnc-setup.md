@@ -8,6 +8,8 @@ Looks like dummy servodrive is working. Time to configure Distributed Clock. We 
 
 [TODO] link configuration
 
+[CiA402 HAL component](https://github.com/dbraun1981/hal-cia402)
+
 [Back to the table of contents](https://kubabuda.github.io/ecat_servo)
 
 [Next: AX58100 rev 2, STMBL adapter](https://kubabuda.github.io/ecat_servo/008-ax58100-board-rev2)
