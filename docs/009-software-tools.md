@@ -165,15 +165,15 @@ Obviously there is is nothiging specific in programming MCU that happens to be E
 
 Points 1-3 are grouped together because all these files (.c, .h sources, ESI binary and XML) have to be in sync. ESI XML acts as manifest for OD impemented in C source, ESC settings too are duplicated in 2 or 3 places. One can do it by hand but it will be PITA. Available tools depend on selected software stack
 
-### Beckhoff original Slave Stack Code:
+## Beckhoff original Slave Stack Code:
 
 ETG provides SSC tool free of charge, but you will not make open source with it.
 
-# SOES:
+## SOES:
 
 The way to go is rt-labs EtherCAT SDK. This is Eclipse plugin based on SOEM library, it is also available as complete IDE installation. Works on Windows, new version is running on Linux too. Has nice UI and builtin explorer with PDO values tracing. If this is your work and your employer can spare 1K5 EUR for license, make him go for it.
 
-Alternatively one can write his own codegen tool. One good starting point would be `objdictgen` from [`CanFestival` project](https://canfestival.org/doc). Beware, old Python versions with dependencies.
+Alternatively one can write his own codegen tool. One good starting point would be `objdictgen` from [`CanFestival`project](https://canfestival.org/doc). Beware, old Python versions with dependencies.
 
 Another would be `EEPROM_generator.html` made by Victor Sluitter. Nice thing (from usage, portability and maintenace point of view) is that it is plain webpage with logic in Javascript file so that no build system or web server is needed. The only dependency is web browser, that should simplify usage, portability and minimize tool maintenance work in years to come.
 I decided to start with web based generator tool. Made it generate SOES 3.X compatible code and added OD editor. While this solution is way less feature packed than SDK, so far it works all right. Maybe it will be released later, when it is better tested.
