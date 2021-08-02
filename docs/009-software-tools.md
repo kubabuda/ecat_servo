@@ -2,13 +2,13 @@
 
 Chip shortage made ESC chips 10x more expensive for a while. AX58100 board rev 2 purchase is put on hold. To do something productive in the mean time, let us talk about working with EtherCAT device development. what one needs to do and how to do it, preferrably with free tools.
 
-1. Prepare ESI binary (that goes into EEPROM chip on slave device): `.bin` or `.hex`
-2. Prepare ESI XML used by EtherCAT master: some settings can be detected over network, some (like available DC modes) are only in that XML file
-3. Prepare `.c, .h` source files for used EtherCAT / CANopen stack ran on slave device MCU
-4. Program MCU itself 
-5. Program EEPROM with ESI binary
-6. Test if device is available on network, reaches OP status, communicates
-7. Test device profile specific functions
+1. [Prepare ESI binary (that goes into EEPROM chip on slave device): `.bin` or `.hex`](#1,-2,-3,-edit-esc-settings-and-object-dictionary)
+2. [Prepare ESI XML used by EtherCAT master: some settings can be detected over network, some (like available DC modes) are only in that XML file](#1,-2,-3,-edit-esc-settings-and-object-dictionary)
+3. [Prepare `.c, .h` source files for used EtherCAT / CANopen stack ran on slave device MCU](#1,-2,-3,-edit-esc-settings-and-object-dictionary)
+4. [Program MCU itself](#4.-program-mcu)
+5. [Program EEPROM with ESI binary](#5,-6-program-esi-eeprom-and-checking-communication )
+6. [Test if device is available on network, reaches OP status, communicates](#5,-6-program-esi-eeprom-and-checking-communication )
+7. [Test device profile specific functions](#7.-device-profile-testing)
 
 # 7. Device profile testing
 
@@ -161,7 +161,7 @@ Using Windows anyway, one can run simple [EtherCAT Explorer](https://sourceforge
 
 Obviously there is is nothiging specific in programming MCU that happens to be EtherCAT device. Just make sure you had reset ESC with (or before) your microcontroller before running changed code to force clean boot sequence.
 
-# 1. - 3. Edit ESC settings and Object Dictionary
+# 1, 2, 3. Edit ESC settings and Object Dictionary
 
 Points 1-3 are grouped together because all these files (.c, .h sources, ESI binary and XML) have to be in sync. ESI XML acts as manifest for OD impemented in C source, ESC settings too are duplicated in 2 or 3 places. One can do it by hand but it will be PITA. Available tools depend on selected software stack
 
