@@ -4,7 +4,7 @@ Chip shortage made ESC chips 10x more expensive for a while. AX58100 board rev 2
 
 1. Prepare ESI binary (that goes into EEPROM chip on slave device): `.bin` or `.hex`
 2. Prepare ESI XML used by EtherCAT master: some settings can be detected over network, some (like available DC modes) are only in that XML file
-3. Prepare `.c`, .`.h` source files for used EtherCAT / CANopen stack ran on slave device MCU
+3. Prepare `.c, .h` source files for used EtherCAT / CANopen stack ran on slave device MCU
 4. Program MCU itself 
 5. Program EEPROM with ESI binary
 6. Test if device is available on network, reaches OP status, communicates
@@ -119,6 +119,7 @@ To flash EEPROM with .bin file, run command:
 ```cmd
 eepromtool.exe \Device\NPF_{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX} 1 -w "soes-esi\eeprom.bin"
 ```
+Or with powershell:
 
 ```powershell
 .\eepromtool.exe "\Device\NPF_{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}" 1 -w "soes-esi\eeprom.bin"
@@ -134,9 +135,9 @@ When EEPROM write is done, power device off and on back again to force applying 
 
 ## Binary file comparison tool 
 
-### Windows: [VBinDiff](https://www.cjmweb.net/vbindiff/VBinDiff-Win32)
+### Windows
 
-If you have to compare and edit binary files on Windows, VBinDiff is nice option
+If you have to compare and edit binary files on Windows, [VBinDiff](https://www.cjmweb.net/vbindiff/VBinDiff-Win32) is nice option
 
 ```cmd
 VBinDiff eeprom.bin  eeprom(1).bin

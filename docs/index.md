@@ -20,6 +20,8 @@ This is documentation for [ECAT servo](https://github.com/kubabuda/ecat_servo), 
 
 [8. AX58100 board rev 2](https://kubabuda.github.io/ecat_servo/008-ax58100-board-rev2)
 
+[9. Software tools for EtherCAT devices development](https://kubabuda.github.io/ecat_servo/009-software-tools)
+
 ## Disclaimer
 
 The EtherCAT Technology, the trade name and logo "EtherCAT" are the intellectual property of, and protected by Beckhoff Automation GmbH.
