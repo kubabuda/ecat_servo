@@ -2,20 +2,20 @@
 
 Chip shortage made ESC chips 10x more expensive for a while. AX58100 board rev 2 purchase is put on hold. To do something productive in the mean time, let us talk about working with EtherCAT device development. what one needs to do and how to do it, preferrably with free tools.
 
-1. [Prepare ESI binary (that goes into EEPROM chip on slave device): `.bin` or `.hex`](#1,-2,-3,-edit-esc-settings-and-object-dictionary)
-2. [Prepare ESI XML used by EtherCAT master: some settings can be detected over network, some (like available DC modes) are only in that XML file](#1,-2,-3,-edit-esc-settings-and-object-dictionary)
-3. [Prepare `.c, .h` source files for used EtherCAT / CANopen stack ran on slave device MCU](#1,-2,-3,-edit-esc-settings-and-object-dictionary)
-4. [Program MCU itself](#4.-program-mcu)
-5. [Program EEPROM with ESI binary](#5,-6-program-esi-eeprom-and-checking-communication )
-6. [Test if device is available on network, reaches OP status, communicates](#5,-6-program-esi-eeprom-and-checking-communication )
-7. [Test device profile specific functions](#7.-device-profile-testing)
+1. [Prepare ESI binary (that goes into EEPROM chip on slave device): `.bin` or `.hex`](#edit-esc-settings-and-object-dictionary)
+2. [Prepare ESI XML used by EtherCAT master: some settings can be detected over network, some (like available DC modes) are only in that XML file](#edit-esc-settings-and-object-dictionary)
+3. [Prepare `.c, .h` source files for used EtherCAT / CANopen stack ran on slave device MCU](#edit-esc-settings-and-object-dictionary)
+4. [Program MCU itself](#program-mcu)
+5. [Program EEPROM with ESI binary](#programming-esi-eeprom-and-checking-communication )
+6. [Test if device is available on network, reaches OP status, communicates](#programming-esi-eeprom-and-checking-communication )
+7. [Test device profile specific functions](#device-profile-testing)
 
-# 7. Device profile testing
+# Device profile testing
 
 Starting from last point: de facto standard software for EtherCAT is Beckhoff TwinCAT. CiA402 profile is available in TwinCAT NC module, this is what I opted to use, and it turned out well. TwinCAT is available only on Windows, as one can tell from its name. [There are good TwinCAT tutorials elsewhere](http://www.contactandcoil.com/twincat-3-tutorial/quick-start/), but using what is needed for this project was already documented in earlier logs. 
 One very good thing when using TwinCAT for tests is its great diagnostics. Error detection with error specific codes and good documentation on their webpage - chances of getting stuck clueless are small even for newcomer.
 
-# 5, 6 Program ESI EEPROM and checking communication 
+# Programming ESI EEPROM and checking communication 
 
 This can be done with TwinCAT too, but we have lighter, open solutions that will work on Linux too.
 
@@ -157,11 +157,11 @@ diff -y <(xxd foo1.bin) <(xxd foo2.bin)
 
 Using Windows anyway, one can run simple [EtherCAT Explorer](https://sourceforge.net/projects/ethercat-explorer/). There is RxPDO value preview and user can type his own values into TxPDO
 
-# 4. Program MCU
+# Program MCU
 
 Obviously there is is nothiging specific in programming MCU that happens to be EtherCAT device. Just make sure you had reset ESC with (or before) your microcontroller before running changed code to force clean boot sequence.
 
-# 1, 2, 3. Edit ESC settings and Object Dictionary
+# Edit ESC settings and Object Dictionary
 
 Points 1-3 are grouped together because all these files (.c, .h sources, ESI binary and XML) have to be in sync. ESI XML acts as manifest for OD impemented in C source, ESC settings too are duplicated in 2 or 3 places. One can do it by hand but it will be PITA. Available tools depend on selected software stack
 
