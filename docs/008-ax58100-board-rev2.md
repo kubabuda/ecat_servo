@@ -30,3 +30,5 @@ STMBL adapter based on that revision:
 [IBOM can be found here](https://kubabuda.github.io/ecat_servo/html/ax58100_stmbl_ibom.html)
 
 [Back to the table of contents](https://kubabuda.github.io/ecat_servo)
+
+[Next: Woring with EtherCAT devives](https://kubabuda.github.io/ecat_servo/009-software-tools)
