@@ -2,6 +2,8 @@
 
 This is documentation for [ECAT servo](https://github.com/kubabuda/ecat_servo), free CiA402 CoE (CAN over EtherCAT) implementation.
 
+[Hackaday.io project is here](https://hackaday.io/project/181058-ecatservo) for more convinient discussion
+
 # Progress log
 
 [1. Introduction, state of art, project targets](https://kubabuda.github.io/ecat_servo/001-intro)
@@ -21,6 +23,9 @@ This is documentation for [ECAT servo](https://github.com/kubabuda/ecat_servo), 
 [8. AX58100 board rev 2](https://kubabuda.github.io/ecat_servo/008-ax58100-board-rev2)
 
 [9. Software tools for EtherCAT devices development](https://kubabuda.github.io/ecat_servo/009-software-tools)
+
+[10. TwinCAT crash course](https://kubabuda.github.io/ecat_servo/010-twincat-3-1-setup)
+
 
 ## Disclaimer
 

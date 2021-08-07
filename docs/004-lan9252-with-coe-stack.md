@@ -53,7 +53,7 @@ Then just retype these codes into .c header, connect it to get state machine cod
 
 # TwinCAT configuration
 
-Way to test if node implementation is working is maing it work with TwinCAT. For that one needs to create project, and add point to point motion control with single axis. Connect device, scan for boxes and select new device in axis settings.
+Way to test if node implementation is working is making it work with TwinCAT. For that one needs to create project, and add point to point motion control with single axis. Connect device, scan for boxes and select new device in axis settings.
 
 ![twincat_add_axis](img/twincat_add_axis.gif "Add new CiA402 axis in TwinCAT")
 
@@ -69,6 +69,10 @@ This is how it should look like. Dummy servo responds to commands, and reports i
 
 ![cia402dummytwincat](img/cia402dummytwincat.jpg "CiA402 loopback dummy works under TwinCAT")
 
+
+
 [Next: LAN9252 PCB rev 2](https://kubabuda.github.io/ecat_servo/005-lan9252-rev2)
+
+[Prev: LAN9252 board assembly](https://kubabuda.github.io/ecat_servo/003-lan9252-board-tests)
 
 [Back to the table of contents](https://kubabuda.github.io/ecat_servo)

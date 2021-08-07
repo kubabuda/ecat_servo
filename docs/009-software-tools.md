@@ -12,7 +12,7 @@ Chip shortage made ESC chips 10x more expensive for a while. AX58100 board rev 2
 
 # Device profile testing
 
-Starting from last point: de facto standard software for EtherCAT is Beckhoff TwinCAT. CiA402 profile is available in TwinCAT NC module, this is what I opted to use, and it turned out well. TwinCAT is available only on Windows, as one can tell from its name. [There are good TwinCAT tutorials elsewhere](http://www.contactandcoil.com/twincat-3-tutorial/quick-start/), but using what is needed for this project was already documented in earlier logs. 
+Starting from last point: de facto standard software for EtherCAT is Beckhoff TwinCAT. CiA402 profile is available in TwinCAT NC module, this is what I opted to use, and it turned out well. TwinCAT is available only on Windows, as one can tell from its name. [There are good TwinCAT tutorials elsewhere](http://www.contactandcoil.com/twincat-3-tutorial/quick-start/), and some instructions (on what is needed for this project) are available [here, in other entries](https://kubabuda.github.io/ecat_servo/010-twincat-3-1-setup).
 One very good thing when using TwinCAT for tests is its great diagnostics. Error detection with error specific codes and good documentation on their webpage - chances of getting stuck clueless are small even for newcomer.
 
 # Programming ESI EEPROM and checking communication 
@@ -185,5 +185,11 @@ Good side of using OSS tool is that user can add functions he needs. AX58100 is 
 ![EEPROM_generator_ax58100](img/EEPROM_generator_ax58100.gif "EEPROM generator for AX58100 without patching")
 
 New web tool supports AX58100 directly.
+
+
+
+[Next: TwinCAT crash course](https://kubabuda.github.io/ecat_servo/010-twincat-3-1-setup)
+
+[Prev: AX58100 rev 2, STMBL adapter](https://kubabuda.github.io/ecat_servo/008-ax58100-board-rev2)
 
 [Back to the table of contents](https://kubabuda.github.io/ecat_servo)

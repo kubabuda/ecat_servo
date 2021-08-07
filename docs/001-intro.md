@@ -109,6 +109,6 @@ Stuff I already know will be needed:
 
 The EtherCAT Technology, the trade name and logo "EtherCAT" are the intellectual property of, and protected by Beckhoff Automation GmbH.
 
-[Next: LAN9252-SPI PSB design](https://kubabuda.github.io/ecat_servo/002-lan9252-board-design)
+[Next: LAN9252-SPI PCB design](https://kubabuda.github.io/ecat_servo/002-lan9252-board-design)
 
 [Back to the table of contents](https://kubabuda.github.io/ecat_servo)

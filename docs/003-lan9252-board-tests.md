@@ -49,4 +49,6 @@ TLDR: dont build this version. It worked good enough for my use case (single nod
 
 [Next step: make CoE stack work on new hardware](https://kubabuda.github.io/ecat_servo/004-lan9252-with-coe-stack)
 
+[Prev: LAN9252-SPI PCB design](https://kubabuda.github.io/ecat_servo/002-lan9252-board-design)
+
 [Back to the table of contents](https://kubabuda.github.io/ecat_servo)
