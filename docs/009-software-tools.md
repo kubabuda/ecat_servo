@@ -175,7 +175,7 @@ The way to go is rt-labs EtherCAT SDK. This is Eclipse plugin based on SOEM libr
 
 Alternatively one can write his own codegen tool. One good starting point would be `objdictgen` from [`CanFestival`project](https://canfestival.org/doc). Beware, old Python versions with dependencies.
 
-Another would be `EEPROM_generator.html` made by Victor Sluitter. Nice thing (from usage, portability and maintenace point of view) is that it is plain webpage with logic in Javascript file so that no build system or web server is needed. The only dependency is web browser, that should simplify usage, portability and minimize tool maintenance work in years to come.
+Another would be `EEPROM_generator.html` made by Victor Sluiter. Nice thing (from usage, portability and maintenace point of view) is that it is plain webpage with logic in Javascript file so that no build system or web server is needed. The only dependency is web browser, that should simplify usage, portability and minimize tool maintenance work in years to come.
 I decided to start with web based generator tool. Made it generate SOES 3.X compatible code and added OD editor. While this solution is way less feature packed than SDK, so far it works all right. Maybe it will be released later, when it is better tested.
 
 ![EEPROM_generator](img/EEPROM_generator.gif "EEPROM_generator web tool")
