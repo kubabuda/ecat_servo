@@ -174,6 +174,31 @@ void cia402_state_machine_givenSWITCH_ON_DISABLED_andSHUTDOWN_CMD_shouldBeSWITCH
 }
 
 //*****************************************************************************
+//                             READY_TO_SWITCH_ON
+//*****************************************************************************
+void cia402_state_machine_givenREADY_TO_SWITCH_ON_andInvalidCommand_shouldBeREADY_TO_SWITCH_ON() {
+    cia402axis.state = READY_TO_SWITCH_ON;
+    *(cia402axis.ALstatus) = 0;            // TODO fuzz
+    uint16_t controlword = -1;             // TODO fuzz != DISABLE_VOLTAGE_CMD, SWITCH_ON_CMD, SWITCH_ON_ENABLE_CMD
+    // act
+    cia402_state_machine(&cia402axis, controlword);
+    // assert
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.state == READY_TO_SWITCH_ON, "state should be READY_TO_SWITCH_ON (0x21)");
+}
+
+void cia402_state_machine_givenREADY_TO_SWITCH_ON_andInvalidCommand_shouldBeNO_TRANSITION() {
+    cia402axis.state = READY_TO_SWITCH_ON;
+    cia402axis.transition = -1;
+    *(cia402axis.ALstatus) = 0;            // TODO fuzz
+    uint16_t controlword = -1;             // TODO fuzz != DISABLE_VOLTAGE_CMD, SWITCH_ON_CMD, SWITCH_ON_ENABLE_CMD
+    // act
+    cia402_state_machine(&cia402axis, controlword);
+    // assert
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.transition == NO_TRANSITION, "transition should be NO_TRANSITION (0)");
+}
+
+
+//*****************************************************************************
 //                             Run tests
 //*****************************************************************************
 int main( int argc, char **argv) {
@@ -198,6 +223,8 @@ int main( int argc, char **argv) {
     RUN_TEST(cia402_state_machine_givenSWITCH_ON_DISABLED_andSHUTDOWN_CMD_shouldBeREADY_TO_SWITCH_ON);
     RUN_TEST(cia402_state_machine_givenSWITCH_ON_DISABLED_andSHUTDOWN_CMD_shouldBeSWITCH_ON_DISABLED_TO_READY_TO_SWITCH_ON);
     // state READY_TO_SWITCH_ON
+    RUN_TEST(cia402_state_machine_givenREADY_TO_SWITCH_ON_andInvalidCommand_shouldBeREADY_TO_SWITCH_ON);
+    RUN_TEST(cia402_state_machine_givenREADY_TO_SWITCH_ON_andInvalidCommand_shouldBeNO_TRANSITION);
     
     // state SWITCHED_ON
     
