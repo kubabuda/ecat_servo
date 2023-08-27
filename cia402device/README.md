@@ -1,3 +1,16 @@
+# CiA 402 device
+
+This project is open source implementation of CANOpen CiA402 profile (motion control), with unit tests.
+
+### TODO 
+
+- structure unit tests like this https://ucgosu.pl/2018/04/unity-framework-testowy-w-c/
+- remove hooks - axis struct has states and transitions, its up for application to act on them
+- maybe init should be dropped too
+- refactor command enum to contain command value
+- replace is_command with macro
+
+
 How to build PlatformIO based project
 =====================================
 
