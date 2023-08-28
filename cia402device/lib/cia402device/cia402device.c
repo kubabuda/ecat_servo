@@ -25,27 +25,27 @@ uint8_t is_command(uint16_t controlword, cia402_controlword_t command_to_check)
 
     switch (command_to_check)
     {
-    case SHUTDOWN_CMD:
+    case SHUTDOWN:
         mask = CIA402_CONTROLWORD_SHUTDOWN_MASK;
         command_value = CIA402_CONTROLWORD_SHUTDOWN_COMMAND;
         break;
-    case SWITCH_ON_CMD:
+    case SWITCH_ON:
         mask = CIA402_CONTROLWORD_SWITCHON_MASK;
         command_value = CIA402_CONTROLWORD_SWITCHON_COMMAND;
         break;
-    case SWITCH_ON_ENABLE_CMD:
+    case SWITCH_ON_ENABLE:
         mask = CIA402_CONTROLWORD_SWITCHON_ENABLE_MASK;
         command_value = CIA402_CONTROLWORD_SWITCHON_ENABLE_COMMAND;
         break;
-    case DISABLE_VOLTAGE_CMD:
+    case DISABLE_VOLTAGE:
         mask = CIA402_CONTROLWORD_DISABLEVOLTAGE_MASK;
         command_value = CIA402_CONTROLWORD_DISABLEVOLTAGE_COMMAND;
         break;
-    case QUICK_STOP_CMD:
+    case QUICK_STOP:
         mask = CIA402_CONTROLWORD_QUICKSTOP_MASK;
         command_value = CIA402_CONTROLWORD_QUICKSTOP_COMMAND;
         break;
-    case DISABLE_OPERATION_CMD:
+    case DISABLE_OPERATION:
         mask = CIA402_CONTROLWORD_DISABLEOPERATION_MASK;
         command_value = CIA402_CONTROLWORD_DISABLEOPERATION_COMMAND;
         break;
@@ -88,7 +88,7 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
     
     case SWITCH_ON_DISABLED: 
     {
-        if (is_command(controlword, SHUTDOWN_CMD) || *(axis->ALstatus) == AL_STATUS_OP) {
+        if (is_command(controlword, SHUTDOWN) || *(axis->ALstatus) == AL_STATUS_OP) {
             // transition 2
             axis->state = READY_TO_SWITCH_ON;
             *(axis->statusword) |= READY_TO_SWITCH_ON;
@@ -101,18 +101,18 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
     
     case READY_TO_SWITCH_ON: 
     {
-        if (is_command(controlword, DISABLE_VOLTAGE_CMD)) {
+        if (is_command(controlword, DISABLE_VOLTAGE)) {
             // transition 7
             axis->state = SWITCH_ON_DISABLED;
             *(axis->statusword) |= SWITCH_ON_DISABLED;
             axis->transition = READY_TO_SWITCH_ON_TO_SWITCH_ON_DISABLED;
-        } else if (is_command(controlword, SWITCH_ON_CMD)) {
+        } else if (is_command(controlword, SWITCH_ON)) {
             // transition 3
             axis->state = SWITCHED_ON;
             *(axis->statusword) |= SWITCHED_ON;
             axis->transition = READY_TO_SWITCH_ON_TO_SWITCHED_ON;
             
-            if (is_command(controlword, SWITCH_ON_ENABLE_CMD)) {
+            if (is_command(controlword, SWITCH_ON_ENABLE)) {
                 // transitions 3 + 4 in one command
                 axis->state = OPERATION_ENABLED;
                 *(axis->statusword) |= OPERATION_ENABLED;
@@ -126,7 +126,7 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
     
     case SWITCHED_ON: 
     {
-        if (is_command(controlword, SHUTDOWN_CMD)) {
+        if (is_command(controlword, SHUTDOWN)) {
             // transition 6
             axis->state = READY_TO_SWITCH_ON;
             *(axis->statusword) |= READY_TO_SWITCH_ON;
@@ -136,7 +136,7 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
             axis->state = OPERATION_ENABLED;
             *(axis->statusword) |= OPERATION_ENABLED;
             axis->transition = SWITCHED_ON_TO_OPERATION_ENABLED;
-        } else if (is_command(controlword, DISABLE_VOLTAGE_CMD)) {
+        } else if (is_command(controlword, DISABLE_VOLTAGE)) {
             // transition 10
             axis->state = SWITCH_ON_DISABLED;
             *(axis->statusword) |= SWITCH_ON_DISABLED;
@@ -149,26 +149,26 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
     
     case OPERATION_ENABLED: 
     {
-        if (is_command(controlword, DISABLE_OPERATION_CMD)) {
+        if (is_command(controlword, DISABLE_OPERATION)) {
             // transition 5
             axis->state = SWITCHED_ON;
             *(axis->statusword) |= SWITCHED_ON;
             axis->transition = OPERATION_ENABLED_TO_SWITCHED_ON;
         }
-        else if (is_command(controlword, SHUTDOWN_CMD)) {
+        else if (is_command(controlword, SHUTDOWN)) {
             // transition 8
             axis->state = READY_TO_SWITCH_ON;
             *(axis->statusword) |= READY_TO_SWITCH_ON;
             axis->transition = OPERATION_ENABLED_TO_READY_TO_SWITCH_ON;
         }
-        else if (is_command(controlword, DISABLE_VOLTAGE_CMD)
+        else if (is_command(controlword, DISABLE_VOLTAGE)
             || *(axis->ALstatus) != AL_STATUS_OP) { // connection lost 
             // transition 9
             axis->state = SWITCH_ON_DISABLED;
             *(axis->statusword) |= SWITCH_ON_DISABLED;
             axis->transition = OPERATION_ENABLED_TO_SWITCH_ON_DISABLED;
         }
-        else if (is_command(controlword, QUICK_STOP_CMD)) {
+        else if (is_command(controlword, QUICK_STOP)) {
             // transition 11
             axis->state = QUICK_STOP_ACTIVE;
             *(axis->statusword) |= QUICK_STOP_ACTIVE;
@@ -186,7 +186,7 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
     
     case QUICK_STOP_ACTIVE: 
     {
-        if (is_command(controlword, DISABLE_VOLTAGE_CMD)) {
+        if (is_command(controlword, DISABLE_VOLTAGE)) {
             // transition 12
             axis->state = SWITCH_ON_DISABLED;
             *(axis->statusword) |= SWITCH_ON_DISABLED;
