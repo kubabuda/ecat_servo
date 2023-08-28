@@ -34,25 +34,25 @@
 
 // 0x6040 Controlword masks
 
-#define CIA402_CONTROLWORD_MASK_SHUTDOWN                           0x0087
-#define CIA402_CONTROLWORD_MASK_SWITCHON                           0x0087
-#define CIA402_CONTROLWORD_MASK_SWITCHON_ENABLE                    0x008F
-#define CIA402_CONTROLWORD_MASK_DISABLEVOLTAGE                     0x0082
-#define CIA402_CONTROLWORD_MASK_QUICKSTOP                          0x0086
-#define CIA402_CONTROLWORD_MASK_DISABLEOPERATION                   0x008F
-#define CIA402_CONTROLWORD_MASK_ENABLEOPERATION                    0x008F
-#define CIA402_CONTROLWORD_MASK_FAULTRESET                         0x0080
+#define CIA402_CONTROLWORD_SHUTDOWN_MASK                           0x0087
+#define CIA402_CONTROLWORD_SWITCHON_MASK                           0x0087
+#define CIA402_CONTROLWORD_SWITCHON_ENABLE_MASK                    0x008F
+#define CIA402_CONTROLWORD_DISABLEVOLTAGE_MASK                     0x0082
+#define CIA402_CONTROLWORD_QUICKSTOP_MASK                          0x0086
+#define CIA402_CONTROLWORD_DISABLEOPERATION_MASK                   0x008F
+#define CIA402_CONTROLWORD_ENABLEOPERATION_MASK                    0x008F
+#define CIA402_CONTROLWORD_FAULTRESET_MASK                         0x0080
 
 // 0x6040 Controlword commands
 
-#define CIA402_CONTROLWORD_COMMAND_SHUTDOWN                        0x0006
-#define CIA402_CONTROLWORD_COMMAND_SWITCHON                        0x0007
-#define CIA402_CONTROLWORD_COMMAND_SWITCHON_ENABLE                 0x000F
-#define CIA402_CONTROLWORD_COMMAND_DISABLEVOLTAGE                  0x0000
-#define CIA402_CONTROLWORD_COMMAND_QUICKSTOP                       0x0002
-#define CIA402_CONTROLWORD_COMMAND_DISABLEOPERATION                0x0007
-#define CIA402_CONTROLWORD_COMMAND_ENABLEOPERATION                 0x000F
-#define CIA402_CONTROLWORD_COMMAND_FAULTRESET                      0x0080
+#define CIA402_CONTROLWORD_SHUTDOWN_COMMAND                        0x0006
+#define CIA402_CONTROLWORD_SWITCHON_COMMAND                        0x0007
+#define CIA402_CONTROLWORD_SWITCHON_ENABLE_COMMAND                 0x000F
+#define CIA402_CONTROLWORD_DISABLEVOLTAGE_COMMAND                  0x0000
+#define CIA402_CONTROLWORD_QUICKSTOP_COMMAND                       0x0002
+#define CIA402_CONTROLWORD_DISABLEOPERATION_COMMAND                0x0007
+#define CIA402_CONTROLWORD_ENABLEOPERATION_COMMAND                 0x000F
+#define CIA402_CONTROLWORD_FAULTRESET_COMMAND                      0x0080
 
 // 0x6041 Statusword bits
 
@@ -67,7 +67,7 @@
 #define CIA402_STATUSWORD_CSP_FOLLOWING_ERROR                      0x2000
 
 
-enum cia402_controlword_command_t {
+enum cia402_controlword_t {
     SHUTDOWN_CMD,
     SWITCH_ON_CMD,
     SWITCH_ON_ENABLE_CMD,
@@ -76,7 +76,7 @@ enum cia402_controlword_command_t {
     DISABLE_OPERATION_CMD,
     ENABLE_OPERATION,
     FAULT_RESET
-} typedef cia402_controlword_command_t;
+} typedef cia402_controlword_t;
 
 
 enum cia402_axis_state_t {

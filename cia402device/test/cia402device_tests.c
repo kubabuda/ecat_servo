@@ -149,7 +149,7 @@ void cia402_state_machine_givenSWITCH_ON_DISABLED_anyCommandAndAL_STATUS_OP_shou
 void cia402_state_machine_givenSWITCH_ON_DISABLED_andSHUTDOWN_CMD_shouldBeREADY_TO_SWITCH_ON() {
     cia402axis.state = SWITCH_ON_DISABLED;
     *(cia402axis.ALstatus) = 0;             // TODO fuzz
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_SHUTDOWN;
+    uint16_t controlword = CIA402_CONTROLWORD_SHUTDOWN_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -160,7 +160,7 @@ void cia402_state_machine_givenSWITCH_ON_DISABLED_andSHUTDOWN_CMD_shouldBeSWITCH
     cia402axis.state = SWITCH_ON_DISABLED;
     cia402axis.transition = -1;
     *(cia402axis.ALstatus) = 0;             // TODO fuzz
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_SHUTDOWN;
+    uint16_t controlword = CIA402_CONTROLWORD_SHUTDOWN_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -191,7 +191,7 @@ void cia402_state_machine_givenREADY_TO_SWITCH_ON_andInvalidCommand_shouldBeNO_T
 
 void cia402_state_machine_givenREADY_TO_SWITCH_ON_andDISABLE_VOLTAGE_CMD_shouldBeSWITCH_ON_DISABLED() {
     cia402axis.state = READY_TO_SWITCH_ON;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_DISABLEVOLTAGE;
+    uint16_t controlword = CIA402_CONTROLWORD_DISABLEVOLTAGE_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -201,7 +201,7 @@ void cia402_state_machine_givenREADY_TO_SWITCH_ON_andDISABLE_VOLTAGE_CMD_shouldB
 void cia402_state_machine_givenREADY_TO_SWITCH_ON_andDISABLE_VOLTAGE_CMD_shouldBeREADY_TO_SWITCH_ON_TO_SWITCH_ON_DISABLED() {
     cia402axis.state = READY_TO_SWITCH_ON;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_DISABLEVOLTAGE;
+    uint16_t controlword = CIA402_CONTROLWORD_DISABLEVOLTAGE_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -210,7 +210,7 @@ void cia402_state_machine_givenREADY_TO_SWITCH_ON_andDISABLE_VOLTAGE_CMD_shouldB
 
 void cia402_state_machine_givenREADY_TO_SWITCH_ON_andSWITCH_ON_CMD_shouldBeSWITCHED_ON() {
     cia402axis.state = READY_TO_SWITCH_ON;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_SWITCHON;
+    uint16_t controlword = CIA402_CONTROLWORD_SWITCHON_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -220,7 +220,7 @@ void cia402_state_machine_givenREADY_TO_SWITCH_ON_andSWITCH_ON_CMD_shouldBeSWITC
 void cia402_state_machine_givenREADY_TO_SWITCH_ON_andSWITCH_ON_CMD_shouldBeREADY_TO_SWITCH_ON_TO_SWITCHED_ON() {
     cia402axis.state = READY_TO_SWITCH_ON;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_SWITCHON;
+    uint16_t controlword = CIA402_CONTROLWORD_SWITCHON_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -229,7 +229,7 @@ void cia402_state_machine_givenREADY_TO_SWITCH_ON_andSWITCH_ON_CMD_shouldBeREADY
 
 void cia402_state_machine_givenREADY_TO_SWITCH_ON_andSWITCH_ON_ENABLE_CMD_shouldBeOPERATION_ENABLED() {
     cia402axis.state = READY_TO_SWITCH_ON;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_SWITCHON_ENABLE;
+    uint16_t controlword = CIA402_CONTROLWORD_SWITCHON_ENABLE_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -239,7 +239,7 @@ void cia402_state_machine_givenREADY_TO_SWITCH_ON_andSWITCH_ON_ENABLE_CMD_should
 void cia402_state_machine_givenREADY_TO_SWITCH_ON_andSWITCH_ON_ENABLE_CMD_shouldBeREADY_TO_SWITCH_ON_TO_OPERATION_ENABLED() {
     cia402axis.state = READY_TO_SWITCH_ON;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_SWITCHON_ENABLE;
+    uint16_t controlword = CIA402_CONTROLWORD_SWITCHON_ENABLE_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -270,7 +270,7 @@ void cia402_state_machine_givenSWITCHED_ON_andInvalidCommand_shouldBeNO_TRANSITI
 
 void cia402_state_machine_givenSWITCHED_ON_andSHUTDOWN_CMD_shouldBeREADY_TO_SWITCH_ON() {
     cia402axis.state = SWITCHED_ON;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_SHUTDOWN;
+    uint16_t controlword = CIA402_CONTROLWORD_SHUTDOWN_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -280,7 +280,7 @@ void cia402_state_machine_givenSWITCHED_ON_andSHUTDOWN_CMD_shouldBeREADY_TO_SWIT
 void cia402_state_machine_givenSWITCHED_ON_andSHUTDOWN_CMD_shouldBeSWITCHED_ON_TO_READY_TO_SWITCH_ON() {
     cia402axis.state = SWITCHED_ON;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_SHUTDOWN;
+    uint16_t controlword = CIA402_CONTROLWORD_SHUTDOWN_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -289,7 +289,7 @@ void cia402_state_machine_givenSWITCHED_ON_andSHUTDOWN_CMD_shouldBeSWITCHED_ON_T
 
 void cia402_state_machine_givenSWITCHED_ON_andENABLE_OPERATION_shouldBeOPERATION_ENABLED() {
     cia402axis.state = SWITCHED_ON;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_ENABLEOPERATION;
+    uint16_t controlword = CIA402_CONTROLWORD_ENABLEOPERATION_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -299,7 +299,7 @@ void cia402_state_machine_givenSWITCHED_ON_andENABLE_OPERATION_shouldBeOPERATION
 void cia402_state_machine_givenSWITCHED_ON_andENABLE_OPERATION_shouldBeSWITCHED_ON_TO_OPERATION_ENABLED() {
     cia402axis.state = SWITCHED_ON;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_ENABLEOPERATION;
+    uint16_t controlword = CIA402_CONTROLWORD_ENABLEOPERATION_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -308,7 +308,7 @@ void cia402_state_machine_givenSWITCHED_ON_andENABLE_OPERATION_shouldBeSWITCHED_
 
 void cia402_state_machine_givenSWITCHED_ON_andDISABLE_VOLTAGE_CMD_shouldBeSWITCH_ON_DISABLED() {
     cia402axis.state = SWITCHED_ON;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_DISABLEVOLTAGE;
+    uint16_t controlword = CIA402_CONTROLWORD_DISABLEVOLTAGE_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -318,7 +318,7 @@ void cia402_state_machine_givenSWITCHED_ON_andDISABLE_VOLTAGE_CMD_shouldBeSWITCH
 void cia402_state_machine_givenSWITCHED_ON_andDISABLE_VOLTAGE_CMD_shouldBeSWITCHED_ON_TO_SWITCH_ON_DISABLED() {
     cia402axis.state = SWITCHED_ON;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_DISABLEVOLTAGE;
+    uint16_t controlword = CIA402_CONTROLWORD_DISABLEVOLTAGE_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -328,21 +328,21 @@ void cia402_state_machine_givenSWITCHED_ON_andDISABLE_VOLTAGE_CMD_shouldBeSWITCH
 //*****************************************************************************
 //                             OPERATION_ENABLED
 //*****************************************************************************
-void cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_andCIA402_CONTROLWORD_COMMAND_ENABLEOPERATION_shouldBeOPERATION_ENABLED() {
+void cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_andCIA402_CONTROLWORD_ENABLEOPERATION_shouldBeOPERATION_ENABLED_COMMAND() {
     cia402axis.state = OPERATION_ENABLED;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_ENABLEOPERATION;
+    uint16_t controlword = CIA402_CONTROLWORD_ENABLEOPERATION_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
     TEST_ASSERT_TRUE_MESSAGE(cia402axis.state == OPERATION_ENABLED, "state should be OPERATION_ENABLED (0x27)");
 }
 
-void cia402_state_machine_givenOPERATION_ENABLED_ENABLED_AL_STATUS_OP_andCIA402_CONTROLWORD_COMMAND_ENABLEOPERATION_shouldBeNO_TRANSITION() {
+void cia402_state_machine_givenOPERATION_ENABLED_ENABLED_AL_STATUS_OP_andCIA402_CONTROLWORD_ENABLEOPERATION_shouldBeNO_TRANSITION_COMMAND() {
     cia402axis.state = OPERATION_ENABLED;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_ENABLEOPERATION;
+    uint16_t controlword = CIA402_CONTROLWORD_ENABLEOPERATION_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -352,7 +352,7 @@ void cia402_state_machine_givenOPERATION_ENABLED_ENABLED_AL_STATUS_OP_andCIA402_
 void cia402_state_machine_givenOPERATION_ENABLED_ENABLED_AL_STATUS_OP_andDISABLE_OPERATION_CMD_shouldBeSWITCHED_ON() {
     cia402axis.state = OPERATION_ENABLED;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_DISABLEOPERATION;
+    uint16_t controlword = CIA402_CONTROLWORD_DISABLEOPERATION_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -363,7 +363,7 @@ void cia402_state_machine_givenOPERATION_ENABLED_ENABLED_AL_STATUS_OP_andDISABLE
     cia402axis.state = OPERATION_ENABLED;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_DISABLEOPERATION;
+    uint16_t controlword = CIA402_CONTROLWORD_DISABLEOPERATION_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -373,7 +373,7 @@ void cia402_state_machine_givenOPERATION_ENABLED_ENABLED_AL_STATUS_OP_andDISABLE
 void cia402_state_machine_givenOPERATION_ENABLED_ENABLED_AL_STATUS_OP_andSHUTDOWN_CMD_shouldBeREADY_TO_SWITCH_ON() {
     cia402axis.state = OPERATION_ENABLED;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_SHUTDOWN;
+    uint16_t controlword = CIA402_CONTROLWORD_SHUTDOWN_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -384,7 +384,7 @@ void cia402_state_machine_givenOPERATION_ENABLED_ENABLED_AL_STATUS_OP_andSHUTDOW
     cia402axis.state = OPERATION_ENABLED;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_SHUTDOWN;
+    uint16_t controlword = CIA402_CONTROLWORD_SHUTDOWN_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -394,7 +394,7 @@ void cia402_state_machine_givenOPERATION_ENABLED_ENABLED_AL_STATUS_OP_andSHUTDOW
 void cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_AndDISABLE_VOLTAGE_CMD_shouldBeSWITCH_ON_DISABLED() {
     cia402axis.state = OPERATION_ENABLED;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_DISABLEVOLTAGE;
+    uint16_t controlword = CIA402_CONTROLWORD_DISABLEVOLTAGE_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -405,7 +405,7 @@ void cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_AndDISABLE_VOLTAGE
     cia402axis.state = OPERATION_ENABLED;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_DISABLEVOLTAGE;
+    uint16_t controlword = CIA402_CONTROLWORD_DISABLEVOLTAGE_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -415,7 +415,7 @@ void cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_AndDISABLE_VOLTAGE
 void cia402_state_machine_givenOPERATION_ENABLED_ALstatusDisconnectedAndAnyCommand_shouldBeSWITCH_ON_DISABLED() {
     cia402axis.state = OPERATION_ENABLED;
     *(cia402axis.ALstatus) = 0;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_ENABLEOPERATION;
+    uint16_t controlword = CIA402_CONTROLWORD_ENABLEOPERATION_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -426,7 +426,7 @@ void cia402_state_machine_givenOPERATION_ENABLED_ALstatusDisconnectedAndAnyComma
     cia402axis.state = OPERATION_ENABLED;
     *(cia402axis.ALstatus) = 0;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_ENABLEOPERATION;
+    uint16_t controlword = CIA402_CONTROLWORD_ENABLEOPERATION_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -436,7 +436,7 @@ void cia402_state_machine_givenOPERATION_ENABLED_ALstatusDisconnectedAndAnyComma
 void cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_AndQUICK_STOP_CMD_shouldBeQUICK_STOP_ACTIVE() {
     cia402axis.state = OPERATION_ENABLED;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_QUICKSTOP;
+    uint16_t controlword = CIA402_CONTROLWORD_QUICKSTOP_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -447,7 +447,7 @@ void cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_AndQUICK_STOP_CMD_
     cia402axis.state = OPERATION_ENABLED;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_QUICKSTOP;
+    uint16_t controlword = CIA402_CONTROLWORD_QUICKSTOP_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -478,7 +478,7 @@ void cia402_state_machine_givenQUICK_STOP_ACTIVE_andInvalidCommand_shouldBeNO_TR
 
 void cia402_state_machine_givenQUICK_STOP_ACTIVE_andDISABLE_VOLTAGE_CMD_shouldBeSWITCH_ON_DISABLED() {
     cia402axis.state = QUICK_STOP_ACTIVE;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_DISABLEVOLTAGE;
+    uint16_t controlword = CIA402_CONTROLWORD_DISABLEVOLTAGE_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -488,7 +488,7 @@ void cia402_state_machine_givenQUICK_STOP_ACTIVE_andDISABLE_VOLTAGE_CMD_shouldBe
 void cia402_state_machine_givenQUICK_STOP_ACTIVE_andDISABLE_VOLTAGE_CMD_shouldBeQUICK_STOP_ACTIVE_TO_SWITCH_ON_DISABLED() {
     cia402axis.state = QUICK_STOP_ACTIVE;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_DISABLEVOLTAGE;
+    uint16_t controlword = CIA402_CONTROLWORD_DISABLEVOLTAGE_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -497,7 +497,7 @@ void cia402_state_machine_givenQUICK_STOP_ACTIVE_andDISABLE_VOLTAGE_CMD_shouldBe
 
 void cia402_state_machine_givenQUICK_STOP_ACTIVE_andENABLE_OPERATION_shouldBeQUICK_STOP_ACTIVE() {
     cia402axis.state = QUICK_STOP_ACTIVE;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_ENABLEOPERATION;
+    uint16_t controlword = CIA402_CONTROLWORD_ENABLEOPERATION_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -507,7 +507,7 @@ void cia402_state_machine_givenQUICK_STOP_ACTIVE_andENABLE_OPERATION_shouldBeQUI
 void cia402_state_machine_givenQUICK_STOP_ACTIVE_andENABLE_OPERATION_shouldBeNO_TRANSITION() {
     cia402axis.state = QUICK_STOP_ACTIVE;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_COMMAND_ENABLEOPERATION;
+    uint16_t controlword = CIA402_CONTROLWORD_ENABLEOPERATION_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -560,7 +560,7 @@ void cia402_state_machine_givenFAULT_andInvalidCommand_shouldBeNO_TRANSITION() {
 
 void cia402_state_machine_givenFAULT_andFAULT_RESET_shouldBeSWITCH_ON_DISABLED() {
     cia402axis.state = FAULT;
-    uint16_t controlword = CIA402_CONTROLWORD_MASK_FAULTRESET;
+    uint16_t controlword = CIA402_CONTROLWORD_FAULTRESET_MASK;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -570,7 +570,7 @@ void cia402_state_machine_givenFAULT_andFAULT_RESET_shouldBeSWITCH_ON_DISABLED()
 void cia402_state_machine_givenFAULT_andFAULT_RESET_shouldBeFAULT_TO_SWITCH_ON_DISABLED() {
     cia402axis.state = FAULT;
     cia402axis.transition = -1;
-    uint16_t controlword = CIA402_CONTROLWORD_MASK_FAULTRESET;
+    uint16_t controlword = CIA402_CONTROLWORD_FAULTRESET_MASK;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -620,8 +620,8 @@ int main( int argc, char **argv) {
     RUN_TEST(cia402_state_machine_givenSWITCHED_ON_andDISABLE_VOLTAGE_CMD_shouldBeSWITCH_ON_DISABLED);
     RUN_TEST(cia402_state_machine_givenSWITCHED_ON_andDISABLE_VOLTAGE_CMD_shouldBeSWITCHED_ON_TO_SWITCH_ON_DISABLED);
     // state OPERATION_ENABLED
-    RUN_TEST(cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_andCIA402_CONTROLWORD_COMMAND_ENABLEOPERATION_shouldBeOPERATION_ENABLED);
-    RUN_TEST(cia402_state_machine_givenOPERATION_ENABLED_ENABLED_AL_STATUS_OP_andCIA402_CONTROLWORD_COMMAND_ENABLEOPERATION_shouldBeNO_TRANSITION);
+    RUN_TEST(cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_andCIA402_CONTROLWORD_ENABLEOPERATION_shouldBeOPERATION_ENABLED_COMMAND);
+    RUN_TEST(cia402_state_machine_givenOPERATION_ENABLED_ENABLED_AL_STATUS_OP_andCIA402_CONTROLWORD_ENABLEOPERATION_shouldBeNO_TRANSITION_COMMAND);
     RUN_TEST(cia402_state_machine_givenOPERATION_ENABLED_ENABLED_AL_STATUS_OP_andDISABLE_OPERATION_CMD_shouldBeSWITCHED_ON);
     RUN_TEST(cia402_state_machine_givenOPERATION_ENABLED_ENABLED_AL_STATUS_OP_andDISABLE_OPERATION_CMD_shouldBeOPERATION_ENABLED_TO_SWITCHED_ON);
     RUN_TEST(cia402_state_machine_givenOPERATION_ENABLED_ENABLED_AL_STATUS_OP_andSHUTDOWN_CMD_shouldBeREADY_TO_SWITCH_ON);

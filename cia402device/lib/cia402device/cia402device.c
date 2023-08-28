@@ -18,7 +18,7 @@ void cia402_init(cia402_axis_t * axis)
 }
 
 
-uint8_t is_command(uint16_t controlword, cia402_controlword_command_t command_to_check)
+uint8_t is_command(uint16_t controlword, cia402_controlword_t command_to_check)
 {
     uint16_t mask          = 0x0000;
     uint16_t command_value = 0xFFFF;
@@ -26,36 +26,36 @@ uint8_t is_command(uint16_t controlword, cia402_controlword_command_t command_to
     switch (command_to_check)
     {
     case SHUTDOWN_CMD:
-        mask = CIA402_CONTROLWORD_MASK_SHUTDOWN;
-        command_value = CIA402_CONTROLWORD_COMMAND_SHUTDOWN;
+        mask = CIA402_CONTROLWORD_SHUTDOWN_MASK;
+        command_value = CIA402_CONTROLWORD_SHUTDOWN_COMMAND;
         break;
     case SWITCH_ON_CMD:
-        mask = CIA402_CONTROLWORD_MASK_SWITCHON;
-        command_value = CIA402_CONTROLWORD_COMMAND_SWITCHON;
+        mask = CIA402_CONTROLWORD_SWITCHON_MASK;
+        command_value = CIA402_CONTROLWORD_SWITCHON_COMMAND;
         break;
     case SWITCH_ON_ENABLE_CMD:
-        mask = CIA402_CONTROLWORD_MASK_SWITCHON_ENABLE;
-        command_value = CIA402_CONTROLWORD_COMMAND_SWITCHON_ENABLE;
+        mask = CIA402_CONTROLWORD_SWITCHON_ENABLE_MASK;
+        command_value = CIA402_CONTROLWORD_SWITCHON_ENABLE_COMMAND;
         break;
     case DISABLE_VOLTAGE_CMD:
-        mask = CIA402_CONTROLWORD_MASK_DISABLEVOLTAGE;
-        command_value = CIA402_CONTROLWORD_COMMAND_DISABLEVOLTAGE;
+        mask = CIA402_CONTROLWORD_DISABLEVOLTAGE_MASK;
+        command_value = CIA402_CONTROLWORD_DISABLEVOLTAGE_COMMAND;
         break;
     case QUICK_STOP_CMD:
-        mask = CIA402_CONTROLWORD_MASK_QUICKSTOP;
-        command_value = CIA402_CONTROLWORD_COMMAND_QUICKSTOP;
+        mask = CIA402_CONTROLWORD_QUICKSTOP_MASK;
+        command_value = CIA402_CONTROLWORD_QUICKSTOP_COMMAND;
         break;
     case DISABLE_OPERATION_CMD:
-        mask = CIA402_CONTROLWORD_MASK_DISABLEOPERATION;
-        command_value = CIA402_CONTROLWORD_COMMAND_DISABLEOPERATION;
+        mask = CIA402_CONTROLWORD_DISABLEOPERATION_MASK;
+        command_value = CIA402_CONTROLWORD_DISABLEOPERATION_COMMAND;
         break;
     case ENABLE_OPERATION:
-        mask = CIA402_CONTROLWORD_MASK_ENABLEOPERATION;
-        command_value = CIA402_CONTROLWORD_COMMAND_ENABLEOPERATION;
+        mask = CIA402_CONTROLWORD_ENABLEOPERATION_MASK;
+        command_value = CIA402_CONTROLWORD_ENABLEOPERATION_COMMAND;
         break;
     case FAULT_RESET:
-        mask = CIA402_CONTROLWORD_MASK_FAULTRESET;
-        command_value = CIA402_CONTROLWORD_COMMAND_FAULTRESET;
+        mask = CIA402_CONTROLWORD_FAULTRESET_MASK;
+        command_value = CIA402_CONTROLWORD_FAULTRESET_COMMAND;
         break;
     default:
         break;
