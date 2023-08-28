@@ -1,42 +1,32 @@
 #include <unity.h>
 #include "cia402device.h"
 
+
 uint16_t mockOD_Status_Word;
 uint16_t mockOD_ALstatus;
 
+
 cia402_axis_t cia402axis = {
-    .init_od_hook        = NULL,
-    .motion_control_hook = NULL,
-    .statusword          = &mockOD_Status_Word,
     .ALstatus            = &mockOD_ALstatus,
+    .statusword          = &mockOD_Status_Word,
+    .state               = NOT_READY_TO_SWITCH_ON,
+    .transition          = NO_TRANSITION,
 };
 
-void setUp(void) {
 
+void setUp(void) {
+    mockOD_ALstatus       = -1;
+    mockOD_Status_Word    = -1;
+    cia402axis.ALstatus   = &mockOD_ALstatus;
+    cia402axis.statusword = &mockOD_Status_Word;
+    cia402axis.state      = NOT_READY_TO_SWITCH_ON;
+    cia402axis.transition = NO_TRANSITION;
 }
 
 void tearDown(void) {
     // clean stuff up here
 }
 
-//*****************************************************************************
-//                             SM Initialization
-//*****************************************************************************
-void cia402_init_givenAxis_shouldSetStateNOT_READY_TO_SWITCH_ON() {
-    cia402axis.state = -1;
-    // act
-    cia402_init(&cia402axis);
-    // assert
-    TEST_ASSERT_TRUE_MESSAGE(cia402axis.state == NOT_READY_TO_SWITCH_ON, "state should be NOT_READY_TO_SWITCH_ON (0)");
-}
-
-void cia402_init_givenAxis_shouldSetNO_TRANSITION() {
-    cia402axis.transition = -1;
-    // act
-    cia402_init(&cia402axis);
-    // assert
-    TEST_ASSERT_TRUE_MESSAGE(cia402axis.transition == NO_TRANSITION, "transition should be NO_TRANSITION (0)");
-}
 //*****************************************************************************
 //                             SM Invalid state handling
 //*****************************************************************************
@@ -583,9 +573,6 @@ void cia402_state_machine_givenFAULT_andFAULT_RESET_shouldBeFAULT_TO_SWITCH_ON_D
 int main( int argc, char **argv) {
     UNITY_BEGIN();
 
-    // initialization
-    RUN_TEST(cia402_init_givenAxis_shouldSetStateNOT_READY_TO_SWITCH_ON);
-    RUN_TEST(cia402_init_givenAxis_shouldSetNO_TRANSITION);
     // invalid state
     RUN_TEST(cia402_state_machine_givenAxisWithInvalidState_shouldResetStateToNOT_READY_TO_SWITCH_ON);
     RUN_TEST(cia402_state_machine_givenAxisWithInvalidState_shouldResetTransitionToNO_TRANSITION);

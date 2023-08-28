@@ -2,20 +2,8 @@
  * Licensed under the GNU General Public License version 2 with exceptions. See
  * LICENSE file in the project root for full license information
  */
-
 #include "stddef.h"
 #include "cia402device.h"
-
-
-void cia402_init(cia402_axis_t * axis) 
-{
-    axis->state = NOT_READY_TO_SWITCH_ON;
-    axis->transition = NO_TRANSITION;
-    
-    if (axis->init_od_hook != NULL) { // TODO null check
-        axis->init_od_hook();
-    }
-}
 
 #define CIA402_COMMAND(CMD)              CIA402_CONTROLWORD_##CMD##_COMMAND
 #define CIA402_MASK(CMD)                 CIA402_CONTROLWORD_##CMD##_MASK
@@ -133,10 +121,6 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
         }
         else {
             *(axis->statusword) |= OPERATION_ENABLED;
-
-            if (axis->motion_control_hook) {
-                axis->motion_control_hook();
-            }
         }
         break;
     }

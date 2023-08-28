@@ -122,7 +122,6 @@ struct cia402_axis_t
 } typedef cia402_axis_t;
 
 
-void cia402_init(cia402_axis_t * axis);
 void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword);
 
 
