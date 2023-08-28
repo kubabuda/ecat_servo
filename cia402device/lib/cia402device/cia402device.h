@@ -24,7 +24,7 @@
 
 #define CIA402_CONTROLWORD_SWITCH_ON                               0x0001
 #define CIA402_CONTROLWORD_ENABLE_VOLTAGE                          0x0002
-#define CIA402_CONTROLWORD_QUICKSTOP                               0x0004  // Optional
+#define CIA402_CONTROLWORD_QUICK_STOP                               0x0004  // Optional
 #define CIA402_CONTROLWORD_ENABLE_OPERATION                        0x0008
 #define CIA402_CONTROLWORD_SETPOINT_ENABLE                         0x0010
 // #define CIA402_CONTROLWORD_B5_RESERVED                             0x0020
@@ -35,24 +35,24 @@
 // 0x6040 Controlword masks
 
 #define CIA402_CONTROLWORD_SHUTDOWN_MASK                           0x0087
-#define CIA402_CONTROLWORD_SWITCHON_MASK                           0x0087
-#define CIA402_CONTROLWORD_SWITCHON_ENABLE_MASK                    0x008F
-#define CIA402_CONTROLWORD_DISABLEVOLTAGE_MASK                     0x0082
-#define CIA402_CONTROLWORD_QUICKSTOP_MASK                          0x0086
-#define CIA402_CONTROLWORD_DISABLEOPERATION_MASK                   0x008F
-#define CIA402_CONTROLWORD_ENABLEOPERATION_MASK                    0x008F
-#define CIA402_CONTROLWORD_FAULTRESET_MASK                         0x0080
+#define CIA402_CONTROLWORD_SWITCH_ON_MASK                          0x0087
+#define CIA402_CONTROLWORD_SWITCH_ON_ENABLE_MASK                   0x008F
+#define CIA402_CONTROLWORD_DISABLE_VOLTAGE_MASK                    0x0082
+#define CIA402_CONTROLWORD_QUICK_STOP_MASK                         0x0086
+#define CIA402_CONTROLWORD_DISABLE_OPERATION_MASK                  0x008F
+#define CIA402_CONTROLWORD_ENABLE_OPERATION_MASK                   0x008F
+#define CIA402_CONTROLWORD_FAULT_RESET_MASK                        0x0080
 
 // 0x6040 Controlword commands
 
 #define CIA402_CONTROLWORD_SHUTDOWN_COMMAND                        0x0006
-#define CIA402_CONTROLWORD_SWITCHON_COMMAND                        0x0007
-#define CIA402_CONTROLWORD_SWITCHON_ENABLE_COMMAND                 0x000F
-#define CIA402_CONTROLWORD_DISABLEVOLTAGE_COMMAND                  0x0000
-#define CIA402_CONTROLWORD_QUICKSTOP_COMMAND                       0x0002
-#define CIA402_CONTROLWORD_DISABLEOPERATION_COMMAND                0x0007
-#define CIA402_CONTROLWORD_ENABLEOPERATION_COMMAND                 0x000F
-#define CIA402_CONTROLWORD_FAULTRESET_COMMAND                      0x0080
+#define CIA402_CONTROLWORD_SWITCH_ON_COMMAND                       0x0007
+#define CIA402_CONTROLWORD_SWITCH_ON_ENABLE_COMMAND                0x000F
+#define CIA402_CONTROLWORD_DISABLE_VOLTAGE_COMMAND                 0x0000
+#define CIA402_CONTROLWORD_QUICK_STOP_COMMAND                      0x0002
+#define CIA402_CONTROLWORD_DISABLE_OPERATION_COMMAND               0x0007
+#define CIA402_CONTROLWORD_ENABLE_OPERATION_COMMAND                0x000F
+#define CIA402_CONTROLWORD_FAULT_RESET_COMMAND                     0x0080
 
 // 0x6041 Statusword bits
 
