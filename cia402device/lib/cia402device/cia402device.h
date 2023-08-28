@@ -24,7 +24,7 @@
 
 #define CIA402_CONTROLWORD_SWITCH_ON                               0x0001
 #define CIA402_CONTROLWORD_ENABLE_VOLTAGE                          0x0002
-#define CIA402_CONTROLWORD_QUICK_STOP                               0x0004  // Optional
+#define CIA402_CONTROLWORD_QUICK_STOP                              0x0004  // Optional
 #define CIA402_CONTROLWORD_ENABLE_OPERATION                        0x0008
 #define CIA402_CONTROLWORD_SETPOINT_ENABLE                         0x0010
 // #define CIA402_CONTROLWORD_B5_RESERVED                             0x0020
@@ -66,7 +66,6 @@
 #define CIA402_STATUSWORD_CSP_DRIVE_FOLLOWS_COMMAND                0x1000
 #define CIA402_STATUSWORD_CSP_FOLLOWING_ERROR                      0x2000
 
-
 enum cia402_controlword_t {
     SHUTDOWN,
     SWITCH_ON,
@@ -77,7 +76,6 @@ enum cia402_controlword_t {
     ENABLE_OPERATION,
     FAULT_RESET
 } typedef cia402_controlword_t;
-
 
 enum cia402_axis_state_t {
     NOT_READY_TO_SWITCH_ON = 0x00,
