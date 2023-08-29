@@ -116,9 +116,6 @@ struct cia402_axis_t
     cia402_axis_transition_t transition;
     uint16_t * statusword;  
     uint16_t * ALstatus;
-    
-    void (*init_od_hook) (void);
-    void (*motion_control_hook) (void);
 } typedef cia402_axis_t;
 
 
