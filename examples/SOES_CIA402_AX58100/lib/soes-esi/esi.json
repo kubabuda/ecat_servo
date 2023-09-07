@@ -1,0 +1,238 @@
+{
+  "form": {},
+  "od": {
+    "sdo": {
+      "1001": {
+        "otype": "VAR",
+        "name": "Error register",
+        "access": "RO",
+        "dtype": "UNSIGNED8",
+        "value": "0",
+        "isSDOitem": true,
+        "data": "&Obj.Error_register"
+      },
+      "6060": {
+        "otype": "VAR",
+        "name": "Modes of operation",
+        "access": "RO",
+        "dtype": "INTEGER8",
+        "value": "0",
+        "isSDOitem": true,
+        "data": "&Obj.Modes_of_operation"
+      },
+      "6061": {
+        "otype": "VAR",
+        "name": "Mode of operation display",
+        "access": "RO",
+        "dtype": "INTEGER8",
+        "value": "0",
+        "isSDOitem": true,
+        "data": "&Obj.Mode_of_operation_display"
+      },
+      "6502": {
+        "otype": "VAR",
+        "name": "Supported drive modes",
+        "access": "RO",
+        "dtype": "UNSIGNED32",
+        "value": "0",
+        "isSDOitem": true,
+        "data": "&Obj.Supported_drive_modes"
+      },
+      "1C32": {
+        "otype": "RECORD",
+        "name": "Sync Manager 2 Parameters",
+        "access": "RO",
+        "items": [
+          {
+            "name": "Max SubIndex"
+          },
+          {
+            "name": "Sync mode",
+            "dtype": "UNSIGNED16",
+            "value": "1",
+            "access": "RWpre",
+            "data": "&Obj.Sync_Manager_2_Parameters.Sync_mode"
+          },
+          {
+            "name": "CycleTime",
+            "dtype": "UNSIGNED32",
+            "value": "0",
+            "data": "&Obj.Sync_Manager_2_Parameters.CycleTime"
+          },
+          {
+            "name": "ShiftTime",
+            "dtype": "UNSIGNED32",
+            "value": "0",
+            "data": "&Obj.Sync_Manager_2_Parameters.ShiftTime"
+          },
+          {
+            "name": "Sync modes supported",
+            "dtype": "UNSIGNED16",
+            "value": "6",
+            "data": "&Obj.Sync_Manager_2_Parameters.Sync_modes_supported"
+          },
+          {
+            "name": "Minimum Cycle Time",
+            "dtype": "UNSIGNED32",
+            "value": "125000",
+            "data": "&Obj.Sync_Manager_2_Parameters.Minimum_Cycle_Time"
+          }
+        ],
+        "isSDOitem": true
+      },
+      "A": {
+        "otype": "RECORD",
+        "name": "Error Settings",
+        "access": "RO",
+        "items": [
+          {
+            "name": "Max SubIndex"
+          },
+          {
+            "name": "New record subitem",
+            "dtype": "UNSIGNED8"
+          }
+        ]
+      },
+      "10F1": {
+        "otype": "RECORD",
+        "name": "Error Settings",
+        "access": "RO",
+        "items": [
+          {
+            "name": "Max SubIndex"
+          },
+          {
+            "name": "Local Error Reaction",
+            "dtype": "UNSIGNED32",
+            "data": "&Obj.Error_Settings.Local_Error_Reaction",
+            "value": "0",
+            "access": "RO"
+          },
+          {
+            "name": "SyncErrorCounterLimit",
+            "dtype": "UNSIGNED32",
+            "value": "200",
+            "access": "RO",
+            "data": "&Obj.Error_Settings.SyncErrorCounterLimit"
+          }
+        ],
+        "isSDOitem": true
+      },
+      "1C33": {
+        "otype": "RECORD",
+        "name": "Sync Manager 3 Parameters",
+        "access": "RO",
+        "items": [
+          {
+            "name": "Max SubIndex"
+          },
+          {
+            "name": "Sync mode",
+            "dtype": "UNSIGNED16",
+            "data": "&Obj.Sync_Manager_3_Parameters.Sync_mode",
+            "value": "1",
+            "access": "RWpre"
+          },
+          {
+            "name": "CycleTime",
+            "dtype": "UNSIGNED32",
+            "value": "0",
+            "access": "RO",
+            "data": "&Obj.Sync_Manager_3_Parameters.CycleTime"
+          },
+          {
+            "name": "ShiftTime",
+            "dtype": "UNSIGNED32",
+            "value": "0",
+            "access": "RO",
+            "data": "&Obj.Sync_Manager_3_Parameters.ShiftTime"
+          },
+          {
+            "name": "Sync modes supported",
+            "dtype": "UNSIGNED16",
+            "value": "6",
+            "access": "RO",
+            "data": "&Obj.Sync_Manager_3_Parameters.Sync_modes_supported"
+          },
+          {
+            "name": "Minimum Cycle Time",
+            "dtype": "UNSIGNED32",
+            "value": "125000",
+            "access": "RO",
+            "data": "&Obj.Sync_Manager_3_Parameters.Minimum_Cycle_Time"
+          }
+        ],
+        "isSDOitem": true
+      }
+    },
+    "txpdo": {
+      "6041": {
+        "otype": "VAR",
+        "name": "Status Word",
+        "access": "RO",
+        "pdo_mappings": [
+          "txpdo"
+        ],
+        "dtype": "UNSIGNED16",
+        "value": "0",
+        "data": "&Obj.Status_Word"
+      },
+      "6064": {
+        "otype": "VAR",
+        "name": "Position actual",
+        "access": "RO",
+        "pdo_mappings": [
+          "txpdo"
+        ],
+        "dtype": "UNSIGNED32",
+        "value": "0",
+        "data": "&Obj.Position_actual"
+      }
+    },
+    "rxpdo": {
+      "6040": {
+        "otype": "VAR",
+        "name": "Control Word",
+        "access": "RO",
+        "pdo_mappings": [
+          "rxpdo"
+        ],
+        "dtype": "UNSIGNED16",
+        "value": "0",
+        "data": "&Obj.Control_Word"
+      },
+      "607A": {
+        "otype": "VAR",
+        "name": "Target position",
+        "access": "RO",
+        "pdo_mappings": [
+          "rxpdo"
+        ],
+        "dtype": "UNSIGNED32",
+        "value": "0",
+        "data": "&Obj.Target_position"
+      }
+    }
+  },
+  "dc": [
+    {
+      "Name": "SM-Synchron",
+      "Description": "SM-Synchron",
+      "AssignActivate": "#x000",
+      "Sync0cycleTime": "0",
+      "Sync0shiftTime": "0",
+      "Sync1cycleTime": "0",
+      "Sync1shiftTime": "0"
+    },
+    {
+      "Name": "DC",
+      "Description": "DC-Synchron",
+      "AssignActivate": "#x300",
+      "Sync0cycleTime": "0",
+      "Sync0shiftTime": "0",
+      "Sync1cycleTime": "0",
+      "Sync1shiftTime": "0"
+    }
+  ]
+}

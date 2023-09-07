@@ -88,7 +88,7 @@ uint16_t check_dc_handler (void)
     /* Indicate we run DC */
     ESCvar.dcsync = 1;
     /* Fetch the sync counter limit (SDO10F1) */
-    ESCvar.synccounterlimit = Obj.ErrorSettings.SyncErrorCounterLimit;
+    ESCvar.synccounterlimit = Obj.Error_Settings.SyncErrorCounterLimit;
 
     uint32_t sync0cycleTime = ESC_enable_DC();
     Obj.Sync_Manager_2_Parameters.CycleTime = sync0cycleTime;
