@@ -8,7 +8,7 @@ Unit tests can be ran natively on PC (for this one needs to [install GCC and add
 
 - structure unit tests like this https://ucgosu.pl/2018/04/unity-framework-testowy-w-c/
 - test coverage https://piolabs.com/blog/insights/test-coverage-on-unit-testing.html https://github.com/Strooom/demoTestCoverage https://embetronicx.com/tutorials/unit_testing/unit-testing-in-c-testing-with-unity/
-- run on target HW: STM32F40x https://piolabs.com/blog/insights/unit-testing-part-2.html
+- run tests on target HW: STM32F40x https://piolabs.com/blog/insights/unit-testing-part-2.html
 
 
 How to build PlatformIO based project

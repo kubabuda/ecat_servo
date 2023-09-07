@@ -7,7 +7,9 @@ This project is free implementation of CoE CiA402 standard, for use with open mo
 
 # [Sources](https://github.com/kubabuda/ecat_servo/tree/main/examples/SOES_CIA402_AX58100)
 
-CiA 402 implementation is [here](https://github.com/kubabuda/ecat_servo/tree/main/examples/SOES_CIA402_AX58100)
+CiA 402 implementation [is here, complete with test coverage](https://github.com/kubabuda/ecat_servo/tree/main/cia402device)
+
+Example application for STM32 is [is here](https://github.com/kubabuda/ecat_servo/tree/main/examples/SOES_CIA402_AX58100)
 
 [./examples](https://github.com/kubabuda/ecat_servo/tree/main/examples) dir contains platform.io projects showing how to use LAN9252 and AX58100 ESCs with STM32 and [SOES library](https://github.com/OpenEtherCATsociety/SOES).
 
