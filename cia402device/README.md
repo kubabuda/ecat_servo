@@ -1,11 +1,11 @@
 # CiA 402 device
 
-This project is open source implementation of CANOpen CiA402 profile (motion control), with unit tests.
-Axis struct has states and transitions, its up for application to act on these
+This project is open source implementation of CANOpen CiA402 profile (motion control), with tests.
+Axis struct has states and transitions, its up for application to act on these.
+Unit tests can be ran natively on PC (for this one needs to [install GCC and add it to PATH](https://piolabs.com/blog/insights/unit-testing-part-2.html))
 
 ### TODO 
 
-- unit test status word changes
 - structure unit tests like this https://ucgosu.pl/2018/04/unity-framework-testowy-w-c/
 - test coverage https://piolabs.com/blog/insights/test-coverage-on-unit-testing.html https://github.com/Strooom/demoTestCoverage https://embetronicx.com/tutorials/unit_testing/unit-testing-in-c-testing-with-unity/
 - run on target HW: STM32F40x https://piolabs.com/blog/insights/unit-testing-part-2.html
@@ -34,3 +34,6 @@ $ pio run --target upload
 # Clean build files
 $ pio run --target clean
 ```
+
+
+

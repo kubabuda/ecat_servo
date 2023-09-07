@@ -5,8 +5,8 @@
 #include "stddef.h"
 #include "cia402device.h"
 
-#define CIA402_COMMAND(CMD)              CIA402_CONTROLWORD_##CMD##_COMMAND
-#define CIA402_MASK(CMD)                 CIA402_CONTROLWORD_##CMD##_MASK
+#define CIA402_COMMAND(CMD)                     CIA402_CONTROLWORD_##CMD##_COMMAND
+#define CIA402_MASK(CMD)                        CIA402_CONTROLWORD_##CMD##_MASK
 #define IS_CIA402_COMMAND(controlword, CMD)     (controlword & CIA402_MASK(CMD)) == CIA402_COMMAND(CMD)
 
 
