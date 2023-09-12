@@ -17,9 +17,12 @@
 #include "options.h"
 
 #define ESCREG_ADDRESS              0x0010
+#define ESCREG_CONF_STATION_ALIAS   0x0012
 #define ESCREG_DLSTATUS             0x0110
 #define ESCREG_ALCONTROL            0x0120
+#define ESCREG_ALCONTROL_ERROR_ACK  0x0010
 #define ESCREG_ALSTATUS             0x0130
+#define ESCREG_ALSTATUS_ERROR_IND   0x0010
 #define ESCREG_ALERROR              0x0134
 #define ESCREG_ALEVENTMASK          0x0204
 #define ESCREG_ALEVENT              0x0220
@@ -58,6 +61,7 @@
 #define ESCREG_AL_STATEMASK         0x001f
 #define ESCREG_AL_ALLBUTINITMASK    0x0e
 #define ESCREG_AL_ERRACKMASK        0x0f
+#define ESCREG_AL_ID_REQUEST        0x0020
 
 #define SYNCTYPE_SUPPORT_FREERUN    0x01
 #define SYNCTYPE_SUPPORT_SYNCHRON   0x02
@@ -206,9 +210,9 @@
 #define MBXstate_backup                 0x05
 #define MBXstate_again                  0x06
 
-#define COE_DEFAULTLENGTH               0x0a
-#define COE_HEADERSIZE                  0x0a
-#define COE_SEGMENTHEADERSIZE           0x03
+#define COE_DEFAULTLENGTH               0x0AU
+#define COE_HEADERSIZE                  0x0AU
+#define COE_SEGMENTHEADERSIZE           0x03U
 #define COE_SDOREQUEST                  0x02
 #define COE_SDORESPONSE                 0x03
 #define COE_SDOINFORMATION              0x08
@@ -292,7 +296,6 @@
 #define APPSTATE_INPUT                 0x01
 #define APPSTATE_OUTPUT                0x02
 
-#define PREALLOC_FACTOR       3
 #define PREALLOC_BUFFER_SIZE  (PREALLOC_FACTOR * MBXSIZE)
 
 typedef struct sm_cfg
@@ -326,7 +329,7 @@ typedef struct esc_cfg
    uint32_t (*pre_object_upload_hook) (uint16_t index,
          uint8_t subindex,
          void * data,
-         size_t size,
+         size_t *size,
          uint16_t flags);
    uint32_t (*post_object_upload_hook) (uint16_t index,
          uint8_t subindex,
@@ -337,6 +340,7 @@ typedef struct esc_cfg
    void (*esc_hw_interrupt_disable) (uint32_t mask);
    void (*esc_hw_eep_handler) (void);
    uint16_t (*esc_check_dc_handler) (void);
+   int (*get_device_id) (uint16_t * device_id);
 } esc_cfg_t;
 
 typedef struct
@@ -450,7 +454,7 @@ typedef struct
    uint32_t (*pre_object_upload_hook) (uint16_t index,
          uint8_t subindex,
          void * data,
-         size_t size,
+         size_t *size,
          uint16_t flags);
    uint32_t (*post_object_upload_hook) (uint16_t index,
          uint8_t subindex,
@@ -461,8 +465,9 @@ typedef struct
    void (*esc_hw_interrupt_disable) (uint32_t mask);
    void (*esc_hw_eep_handler) (void);
    uint16_t (*esc_check_dc_handler) (void);
+   int (*get_device_id) (uint16_t * device_id);
    uint8_t MBXrun;
-   size_t activembxsize;
+   uint32_t activembxsize;
    sm_cfg_t * activemb0;
    sm_cfg_t * activemb1;
    uint16_t ESC_SM2_sml;
@@ -484,8 +489,8 @@ typedef struct
    uint8_t segmented;
    void *data;
    uint16_t entries;
-   uint16_t frags;
-   uint16_t fragsleft;
+   uint32_t frags;
+   uint32_t fragsleft;
    uint16_t index;
    uint8_t subindex;
    uint16_t flags;
@@ -501,7 +506,7 @@ typedef struct
    /* Volatile since it may be read from ISR */
    volatile int watchdogcnt;
    volatile uint32_t Time;
-   volatile uint16_t ALevent;
+   volatile uint32_t ALevent;
    volatile int8_t synccounter;
    volatile _App App;
    uint8_t mbxdata[PREALLOC_BUFFER_SIZE];
@@ -574,7 +579,7 @@ typedef struct CC_PACKED
 CC_PACKED_END
 
 CC_PACKED_BEGIN
-typedef struct CC_PACKED
+typedef struct CC_PACKED CC_ALIGNED(4)
 {
    _MBXh mbxheader;
    _COEh coeheader;
@@ -586,7 +591,7 @@ typedef struct CC_PACKED
 CC_PACKED_END
 
 CC_PACKED_BEGIN
-typedef struct CC_PACKED
+typedef struct CC_PACKED CC_ALIGNED(4)
 {
    _MBXh mbxheader;
    _COEh coeheader;
@@ -696,11 +701,11 @@ typedef struct
 #define ESC_SM3_smc         (SM3_smc)
 #define ESC_SM3_act         (SM3_act)
 
-#define ESC_MBXHSIZE        sizeof(_MBXh)
+#define ESC_MBXHSIZE        ((uint32_t)sizeof(_MBXh))
 #define ESC_MBXDSIZE        (ESC_MBXSIZE - ESC_MBXHSIZE)
-#define ESC_FOEHSIZE        sizeof(_FOEh)
+#define ESC_FOEHSIZE        (uint32_t)sizeof(_FOEh)
 #define ESC_FOE_DATA_SIZE   (ESC_MBXSIZE - (ESC_MBXHSIZE +ESC_FOEHSIZE))
-#define ESC_EOEHSIZE        sizeof(_EOEh)
+#define ESC_EOEHSIZE        ((uint32_t)sizeof(_EOEh))
 #define ESC_EOE_DATA_SIZE   (ESC_MBXSIZE - (ESC_MBXHSIZE +ESC_EOEHSIZE))
 
 void ESC_config (esc_cfg_t * cfg);
