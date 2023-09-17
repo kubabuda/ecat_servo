@@ -10,8 +10,19 @@
 #define IS_CIA402_COMMAND(controlword, CMD)     (controlword & CIA402_MASK(CMD)) == CIA402_COMMAND(CMD)
 
 
+void cia402_initialize(cia402_axis_t * axis, uint16_t * statusword, uint16_t * ALstatus) {
+    axis->ALstatus   = ALstatus;
+    axis->statusword = statusword;
+    axis->state      = NOT_READY_TO_SWITCH_ON;
+    axis->transition = NO_TRANSITION;
+    axis->flags.config_allowed    = 0;
+    axis->flags.axis_func_enabled = 0;
+    axis->flags.hv_power_applied  = 0;
+    axis->flags.brake_applied     = 0;
+    axis->prevflags = axis->flags;
+}
+
 void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
-    
     *(axis->statusword) = 0x0000;
     axis->transition = NO_TRANSITION;
 

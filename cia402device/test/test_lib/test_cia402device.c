@@ -6,27 +6,37 @@ uint16_t mockOD_Status_Word;
 uint16_t mockOD_ALstatus;
 
 
-cia402_axis_t cia402axis = {
-    .ALstatus            = &mockOD_ALstatus,
-    .statusword          = &mockOD_Status_Word,
-    .state               = NOT_READY_TO_SWITCH_ON,
-    .transition          = NO_TRANSITION,
-};
+cia402_axis_t cia402axis;
 
 
 void setUp(void) {
-    mockOD_ALstatus       = -1;
-    mockOD_Status_Word    = 0;
-    cia402axis.ALstatus   = &mockOD_ALstatus;
-    cia402axis.statusword = &mockOD_Status_Word;
-    cia402axis.state      = NOT_READY_TO_SWITCH_ON;
-    cia402axis.transition = NO_TRANSITION;
+    mockOD_ALstatus    = -1;
+    mockOD_Status_Word = 0;
+    cia402_initialize(&cia402axis, &mockOD_Status_Word, &mockOD_ALstatus);
 }
 
 void tearDown(void) {
     // clean stuff up here
 }
 
+//*****************************************************************************
+//                             SM Initialization
+//*****************************************************************************
+void cia402_initialize_givenAxis_shouldSetStateNOT_READY_TO_SWITCH_ON() {
+    cia402axis.state = -1;
+    // act
+    cia402_initialize(&cia402axis, &mockOD_Status_Word, &mockOD_ALstatus);
+    // assert
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.state == NOT_READY_TO_SWITCH_ON, "state should be NOT_READY_TO_SWITCH_ON (0)");
+}
+
+void cia402_initialize_givenAxis_shouldSetNO_TRANSITION() {
+    cia402axis.transition = -1;
+    // act
+    cia402_initialize(&cia402axis, &mockOD_Status_Word, &mockOD_ALstatus);
+    // assert
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.transition == NO_TRANSITION, "transition should be NO_TRANSITION (0)");
+}
 //*****************************************************************************
 //                             SM Invalid state handling
 //*****************************************************************************

@@ -109,15 +109,25 @@ enum cia402_axis_transition_t {
     QUICK_STOP_ACTIVE_TO_OPERATION_ENABLED       = 16, // supporting not recommended
 } typedef cia402_axis_transition_t;
 
+struct cia402_flags_t {
+    uint8_t config_allowed    : 1;
+    uint8_t axis_func_enabled : 1;
+    uint8_t hv_power_applied  : 1;
+    uint8_t brake_applied     : 1;
+} typedef cia402_flags_t;
 
 struct cia402_axis_t
 {
     cia402_axis_state_t state;
     cia402_axis_transition_t transition;
+    cia402_flags_t flags;
+    cia402_flags_t prevflags;
     uint16_t * statusword;  
     uint16_t * ALstatus;
 } typedef cia402_axis_t;
 
+
+void cia402_initialize(cia402_axis_t * axis, uint16_t * statusword, uint16_t * ALStatus);
 
 void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword);
 
