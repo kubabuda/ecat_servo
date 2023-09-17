@@ -22,6 +22,22 @@ void tearDown(void) {
 //*****************************************************************************
 //                             SM Initialization
 //*****************************************************************************
+void cia402_initialize_givenstatuswordPtr_shouldSetstatuswordPtr() {
+    cia402axis.state = -1;
+    // act
+    cia402_initialize(&cia402axis, &mockOD_Status_Word, &mockOD_Status_Word);
+    // assert
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.statusword == &mockOD_Status_Word, "statusword pointer should be set to call parameter");
+}
+
+void cia402_initialize_givenALstatusPtr_shouldSetALstatusPtr() {
+    cia402axis.state = -1;
+    // act
+    cia402_initialize(&cia402axis, &mockOD_Status_Word, &mockOD_ALstatus);
+    // assert
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.ALstatus == &mockOD_ALstatus, "ALstatus pointer should be set to call parameter");
+}
+
 void cia402_initialize_givenAxis_shouldSetStateNOT_READY_TO_SWITCH_ON() {
     cia402axis.state = -1;
     // act
@@ -36,6 +52,27 @@ void cia402_initialize_givenAxis_shouldSetNO_TRANSITION() {
     cia402_initialize(&cia402axis, &mockOD_Status_Word, &mockOD_ALstatus);
     // assert
     TEST_ASSERT_TRUE_MESSAGE(cia402axis.transition == NO_TRANSITION, "transition should be NO_TRANSITION (0)");
+}
+
+void cia402_initialize_givenAxis_shouldSetflagsTo0() {
+    cia402axis.transition = -1;
+    // act
+    cia402_initialize(&cia402axis, &mockOD_Status_Word, &mockOD_ALstatus);
+    // assert
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.config_allowed == 0, "config_allowed should be set to 0");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.axis_func_enabled == 0, "axis_func_enabled should be set to 0");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.hv_power_applied == 0, "hv_power_applied should be set to 0");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.brake_applied == 0, "brake_applied should be set to 0");
+}
+void cia402_initialize_givenAxis_shouldSetprevflagsTo0() {
+    cia402axis.transition = -1;
+    // act
+    cia402_initialize(&cia402axis, &mockOD_Status_Word, &mockOD_ALstatus);
+    // assert
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.prevflags.config_allowed == 0, "config_allowed should be set to 0");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.prevflags.axis_func_enabled == 0, "axis_func_enabled should be set to 0");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.prevflags.hv_power_applied == 0, "hv_power_applied should be set to 0");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.prevflags.brake_applied == 0, "brake_applied should be set to 0");
 }
 //*****************************************************************************
 //                             SM Invalid state handling
@@ -828,6 +865,13 @@ void cia402_state_machine_givenFAULT_andFAULT_RESET_shouldSetTransitionFAULT_TO_
 int main( int argc, char **argv) {
     UNITY_BEGIN();
 
+    // initialization
+    RUN_TEST(cia402_initialize_givenstatuswordPtr_shouldSetstatuswordPtr);
+    RUN_TEST(cia402_initialize_givenALstatusPtr_shouldSetALstatusPtr);
+    RUN_TEST(cia402_initialize_givenAxis_shouldSetStateNOT_READY_TO_SWITCH_ON);
+    RUN_TEST(cia402_initialize_givenAxis_shouldSetNO_TRANSITION);
+    RUN_TEST(cia402_initialize_givenAxis_shouldSetflagsTo0);
+    RUN_TEST(cia402_initialize_givenAxis_shouldSetprevflagsTo0);
     // invalid state
     RUN_TEST(cia402_state_machine_givenAxisWithInvalidState_shouldSetStateToNOT_READY_TO_SWITCH_ON);
     RUN_TEST(cia402_state_machine_givenAxisWithInvalidState_shouldSetStatuswordToNOT_READY_TO_SWITCH_ON);
