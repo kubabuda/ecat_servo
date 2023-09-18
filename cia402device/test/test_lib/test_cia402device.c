@@ -54,7 +54,7 @@ void cia402_initialize_givenAxis_shouldSetNO_TRANSITION() {
     TEST_ASSERT_TRUE_MESSAGE(cia402axis.transition == NO_TRANSITION, "transition should be NO_TRANSITION (0)");
 }
 
-void cia402_initialize_givenAxis_shouldSetflagsTo0() {
+void cia402_initialize_givenAxis_shouldClearFlags() {
     cia402axis.transition = -1;
     cia402axis.flags.config_allowed    = 1;
     cia402axis.flags.axis_func_enabled = 1;
@@ -68,6 +68,7 @@ void cia402_initialize_givenAxis_shouldSetflagsTo0() {
     TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.hv_power_applied == 0, "hv_power_applied should be set to 0");
     TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.brake_applied == 0, "brake_applied should be set to 0");
 }
+
 void cia402_initialize_givenAxis_shouldSetprevflagsTo0() {
     cia402axis.transition = -1;
     cia402axis.prevflags.config_allowed    = 1;
@@ -86,8 +87,8 @@ void cia402_initialize_givenAxis_shouldSetprevflagsTo0() {
 //                             SM Invalid state handling
 //*****************************************************************************
 void cia402_state_machine_givenAxisWithInvalidState_shouldSetStateToNOT_READY_TO_SWITCH_ON() {
-    cia402axis.state = -1;                 // TODO fuzz
-    uint16_t controlword = -1;             // TODO fuzz
+    cia402axis.state = -1;
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -95,8 +96,8 @@ void cia402_state_machine_givenAxisWithInvalidState_shouldSetStateToNOT_READY_TO
 }
 
 void cia402_state_machine_givenAxisWithInvalidState_shouldSetStatuswordToNOT_READY_TO_SWITCH_ON() {
-    cia402axis.state = -1;                 // TODO fuzz
-    uint16_t controlword = -1;             // TODO fuzz
+    cia402axis.state = -1;
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -104,20 +105,37 @@ void cia402_state_machine_givenAxisWithInvalidState_shouldSetStatuswordToNOT_REA
 }
 
 void cia402_state_machine_givenAxisWithInvalidState_shouldSetTransitionToNO_TRANSITION() {
-    cia402axis.state = -1;                 // TODO fuzz
-    uint16_t controlword = -1;             // TODO fuzz
+    cia402axis.state = -1;
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
     TEST_ASSERT_TRUE_MESSAGE(cia402axis.transition == NO_TRANSITION, "transition should be NO_TRANSITION (0)");
+}
+
+void cia402_state_machine_givenAxisWithInvalidState_shouldClearFlags() {
+    cia402axis.transition = -1;
+    cia402axis.flags.config_allowed    = 1;
+    cia402axis.flags.axis_func_enabled = 1;
+    cia402axis.flags.hv_power_applied  = 1;
+    cia402axis.flags.brake_applied     = 1;
+    cia402axis.state = -1;
+    uint16_t controlword = -1;
+    // act
+    cia402_state_machine(&cia402axis, controlword);
+    // assert
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.config_allowed == 0, "config_allowed should be set to 0");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.axis_func_enabled == 0, "axis_func_enabled should be set to 0");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.hv_power_applied == 0, "hv_power_applied should be set to 0");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.brake_applied == 0, "brake_applied should be set to 0");
 }
 //*****************************************************************************
 //                             NOT_READY_TO_SWITCH_ON
 //*****************************************************************************
 void cia402_state_machine_givenNOT_READY_TO_SWITCH_ON_andAnyCommand_shouldSetStateNOT_READY_TO_SWITCH_ON() {
     cia402axis.state = NOT_READY_TO_SWITCH_ON;
-    *(cia402axis.ALstatus) = 0;            // TODO fuzz
-    uint16_t controlword = -1;             // TODO fuzz
+    *(cia402axis.ALstatus) = 0;
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -126,8 +144,8 @@ void cia402_state_machine_givenNOT_READY_TO_SWITCH_ON_andAnyCommand_shouldSetSta
 
 void cia402_state_machine_givenNOT_READY_TO_SWITCH_ON_andAnyCommand_shouldSetStatuswordNOT_READY_TO_SWITCH_ON() {
     cia402axis.state = NOT_READY_TO_SWITCH_ON;
-    *(cia402axis.ALstatus) = 0;            // TODO fuzz
-    uint16_t controlword = -1;             // TODO fuzz
+    *(cia402axis.ALstatus) = 0;
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -137,8 +155,8 @@ void cia402_state_machine_givenNOT_READY_TO_SWITCH_ON_andAnyCommand_shouldSetSta
 void cia402_state_machine_givenNOT_READY_TO_SWITCH_ON_andAnyCommand_shouldSetTransitionNO_TRANSITION() {
     cia402axis.state = NOT_READY_TO_SWITCH_ON;
     cia402axis.transition = -1;
-    *(cia402axis.ALstatus) = 0;            // TODO fuzz
-    uint16_t controlword = -1;             // TODO fuzz
+    *(cia402axis.ALstatus) = 0;
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -148,7 +166,7 @@ void cia402_state_machine_givenNOT_READY_TO_SWITCH_ON_andAnyCommand_shouldSetTra
 void cia402_state_machine_givenNOT_READY_TO_SWITCH_ON_anyCommandandAL_STATUS_OP_shouldSetStateSWITCH_ON_DISABLED() {
     cia402axis.state = NOT_READY_TO_SWITCH_ON;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
-    uint16_t controlword = -1;             // TODO fuzz
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -158,7 +176,7 @@ void cia402_state_machine_givenNOT_READY_TO_SWITCH_ON_anyCommandandAL_STATUS_OP_
 void cia402_state_machine_givenNOT_READY_TO_SWITCH_ON_anyCommandandAL_STATUS_OP_shouldSetStatuswordSWITCH_ON_DISABLED() {
     cia402axis.state = NOT_READY_TO_SWITCH_ON;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
-    uint16_t controlword = -1;             // TODO fuzz
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -168,7 +186,7 @@ void cia402_state_machine_givenNOT_READY_TO_SWITCH_ON_anyCommandandAL_STATUS_OP_
 void cia402_state_machine_givenNOT_READY_TO_SWITCH_ON_anyCommandandAL_STATUS_OP_shouldSetTransitionNOT_READY_TO_SWITCH_ON_TO_SWITCH_ON_DISABLED() {
     cia402axis.state = NOT_READY_TO_SWITCH_ON;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
-    uint16_t controlword = -1;             // TODO fuzz
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -180,8 +198,8 @@ void cia402_state_machine_givenNOT_READY_TO_SWITCH_ON_anyCommandandAL_STATUS_OP_
 //*****************************************************************************
 void cia402_state_machine_givenSWITCH_ON_DISABLED_andInvalidCommand_shouldSetStateSWITCH_ON_DISABLED() {
     cia402axis.state = SWITCH_ON_DISABLED;
-    *(cia402axis.ALstatus) = 0;            // TODO fuzz
-    uint16_t controlword = -1;             // TODO fuzz != SHUTDOWN
+    *(cia402axis.ALstatus) = 0;
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -190,8 +208,8 @@ void cia402_state_machine_givenSWITCH_ON_DISABLED_andInvalidCommand_shouldSetSta
 
 void cia402_state_machine_givenSWITCH_ON_DISABLED_andInvalidCommand_shouldSetStatuswordSWITCH_ON_DISABLED() {
     cia402axis.state = SWITCH_ON_DISABLED;
-    *(cia402axis.ALstatus) = 0;            // TODO fuzz
-    uint16_t controlword = -1;             // TODO fuzz != SHUTDOWN
+    *(cia402axis.ALstatus) = 0;
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -201,8 +219,8 @@ void cia402_state_machine_givenSWITCH_ON_DISABLED_andInvalidCommand_shouldSetSta
 void cia402_state_machine_givenSWITCH_ON_DISABLED_andInvalidCommand_shouldSetTransitionNO_TRANSITION() {
     cia402axis.state = SWITCH_ON_DISABLED;
     cia402axis.transition = -1;
-    *(cia402axis.ALstatus) = 0;            // TODO fuzz
-    uint16_t controlword = -1;             // TODO fuzz != SHUTDOWN
+    *(cia402axis.ALstatus) = 0;
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -212,7 +230,7 @@ void cia402_state_machine_givenSWITCH_ON_DISABLED_andInvalidCommand_shouldSetTra
 void cia402_state_machine_givenSWITCH_ON_DISABLED_anyCommandAndAL_STATUS_OP_shouldSetStateREADY_TO_SWITCH_ON() {
     cia402axis.state = SWITCH_ON_DISABLED;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
-    uint16_t controlword = -1;             // TODO fuzz != SHUTDOWN
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -222,7 +240,7 @@ void cia402_state_machine_givenSWITCH_ON_DISABLED_anyCommandAndAL_STATUS_OP_shou
 void cia402_state_machine_givenSWITCH_ON_DISABLED_anyCommandAndAL_STATUS_OP_shouldSetStatuswordREADY_TO_SWITCH_ON() {
     cia402axis.state = SWITCH_ON_DISABLED;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
-    uint16_t controlword = -1;             // TODO fuzz != SHUTDOWN
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -233,7 +251,7 @@ void cia402_state_machine_givenSWITCH_ON_DISABLED_anyCommandAndAL_STATUS_OP_shou
     cia402axis.state = SWITCH_ON_DISABLED;
     cia402axis.transition = -1;
     *(cia402axis.ALstatus) = AL_STATUS_OP;
-    uint16_t controlword = -1;             // TODO fuzz != SHUTDOWN
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -242,7 +260,7 @@ void cia402_state_machine_givenSWITCH_ON_DISABLED_anyCommandAndAL_STATUS_OP_shou
 
 void cia402_state_machine_givenSWITCH_ON_DISABLED_andSHUTDOWN_shouldSetStateREADY_TO_SWITCH_ON() {
     cia402axis.state = SWITCH_ON_DISABLED;
-    *(cia402axis.ALstatus) = 0;             // TODO fuzz
+    *(cia402axis.ALstatus) = 0;
     uint16_t controlword = CIA402_CONTROLWORD_SHUTDOWN_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
@@ -252,7 +270,7 @@ void cia402_state_machine_givenSWITCH_ON_DISABLED_andSHUTDOWN_shouldSetStateREAD
 
 void cia402_state_machine_givenSWITCH_ON_DISABLED_andSHUTDOWN_shouldSetStatuswordREADY_TO_SWITCH_ON() {
     cia402axis.state = SWITCH_ON_DISABLED;
-    *(cia402axis.ALstatus) = 0;             // TODO fuzz
+    *(cia402axis.ALstatus) = 0;
     uint16_t controlword = CIA402_CONTROLWORD_SHUTDOWN_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
@@ -263,7 +281,7 @@ void cia402_state_machine_givenSWITCH_ON_DISABLED_andSHUTDOWN_shouldSetStatuswor
 void cia402_state_machine_givenSWITCH_ON_DISABLED_andSHUTDOWN_shouldSetTransitionSWITCH_ON_DISABLED_TO_READY_TO_SWITCH_ON() {
     cia402axis.state = SWITCH_ON_DISABLED;
     cia402axis.transition = -1;
-    *(cia402axis.ALstatus) = 0;             // TODO fuzz
+    *(cia402axis.ALstatus) = 0;
     uint16_t controlword = CIA402_CONTROLWORD_SHUTDOWN_COMMAND;
     // act
     cia402_state_machine(&cia402axis, controlword);
@@ -276,7 +294,7 @@ void cia402_state_machine_givenSWITCH_ON_DISABLED_andSHUTDOWN_shouldSetTransitio
 //*****************************************************************************
 void cia402_state_machine_givenREADY_TO_SWITCH_ON_andInvalidCommand_shouldSetStateREADY_TO_SWITCH_ON() {
     cia402axis.state = READY_TO_SWITCH_ON;
-    uint16_t controlword = -1;             // TODO fuzz != DISABLE_VOLTAGE, SWITCH_ON, SWITCH_ON_ENABLE
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -285,7 +303,7 @@ void cia402_state_machine_givenREADY_TO_SWITCH_ON_andInvalidCommand_shouldSetSta
 
 void cia402_state_machine_givenREADY_TO_SWITCH_ON_andInvalidCommand_shouldSetStatuswordREADY_TO_SWITCH_ON() {
     cia402axis.state = READY_TO_SWITCH_ON;
-    uint16_t controlword = -1;             // TODO fuzz != DISABLE_VOLTAGE, SWITCH_ON, SWITCH_ON_ENABLE
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -295,7 +313,7 @@ void cia402_state_machine_givenREADY_TO_SWITCH_ON_andInvalidCommand_shouldSetSta
 void cia402_state_machine_givenREADY_TO_SWITCH_ON_andInvalidCommand_shouldSetTransitionNO_TRANSITION() {
     cia402axis.state = READY_TO_SWITCH_ON;
     cia402axis.transition = -1;
-    uint16_t controlword = -1;             // TODO fuzz != DISABLE_VOLTAGE, SWITCH_ON, SWITCH_ON_ENABLE
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -391,7 +409,7 @@ void cia402_state_machine_givenREADY_TO_SWITCH_ON_andSWITCH_ON_ENABLE_shouldSetT
 //*****************************************************************************
 void cia402_state_machine_givenSWITCHED_ON_andInvalidCommand_shouldSetStateSWITCHED_ON() {
     cia402axis.state = SWITCHED_ON;
-    uint16_t controlword = -1;             // TODO fuzz != SHUTDOWN ENABLE_OPERATION DISABLE_VOLTAGE
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -400,7 +418,7 @@ void cia402_state_machine_givenSWITCHED_ON_andInvalidCommand_shouldSetStateSWITC
 
 void cia402_state_machine_givenSWITCHED_ON_andInvalidCommand_shouldSetStatuswordSWITCHED_ON() {
     cia402axis.state = SWITCHED_ON;
-    uint16_t controlword = -1;             // TODO fuzz != SHUTDOWN ENABLE_OPERATION DISABLE_VOLTAGE
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -410,7 +428,7 @@ void cia402_state_machine_givenSWITCHED_ON_andInvalidCommand_shouldSetStatusword
 void cia402_state_machine_givenSWITCHED_ON_andInvalidCommand_shouldSetTransitionNO_TRANSITION() {
     cia402axis.state = SWITCHED_ON;
     cia402axis.transition = -1;
-    uint16_t controlword = -1;             // TODO fuzz != SHUTDOWN ENABLE_OPERATION DISABLE_VOLTAGE
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -695,7 +713,7 @@ void cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_AndQUICK_STOP_shou
 //*****************************************************************************
 void cia402_state_machine_givenQUICK_STOP_ACTIVE_andInvalidCommand_shouldSetStateQUICK_STOP_ACTIVE() {
     cia402axis.state = QUICK_STOP_ACTIVE;
-    uint16_t controlword = -1;             // TODO fuzz != DISABLE_VOLTAGE ENABLE_OPERATION
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -704,7 +722,7 @@ void cia402_state_machine_givenQUICK_STOP_ACTIVE_andInvalidCommand_shouldSetStat
 
 void cia402_state_machine_givenQUICK_STOP_ACTIVE_andInvalidCommand_shouldSetStatuswordQUICK_STOP_ACTIVE() {
     cia402axis.state = QUICK_STOP_ACTIVE;
-    uint16_t controlword = -1;             // TODO fuzz != DISABLE_VOLTAGE ENABLE_OPERATION
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -714,7 +732,7 @@ void cia402_state_machine_givenQUICK_STOP_ACTIVE_andInvalidCommand_shouldSetStat
 void cia402_state_machine_givenQUICK_STOP_ACTIVE_andInvalidCommand_shouldSetTransitionNO_TRANSITION() {
     cia402axis.state = QUICK_STOP_ACTIVE;
     cia402axis.transition = -1;
-    uint16_t controlword = -1;             // TODO fuzz != DISABLE_VOLTAGE ENABLE_OPERATION
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -782,7 +800,7 @@ void cia402_state_machine_givenQUICK_STOP_ACTIVE_andENABLE_OPERATION_shouldSetTr
 //*****************************************************************************
 void cia402_state_machine_givenFAULT_REACTION_ACTIVE_andAnyCommand_shouldSetStateFAULT() {
     cia402axis.state = FAULT_REACTION_ACTIVE;
-    uint16_t controlword = -1;             // TODO fuzz
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -791,7 +809,7 @@ void cia402_state_machine_givenFAULT_REACTION_ACTIVE_andAnyCommand_shouldSetStat
 
 void cia402_state_machine_givenFAULT_REACTION_ACTIVE_andAnyCommand_shouldSetStatuswordFAULT() {
     cia402axis.state = FAULT_REACTION_ACTIVE;
-    uint16_t controlword = -1;             // TODO fuzz
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -801,7 +819,7 @@ void cia402_state_machine_givenFAULT_REACTION_ACTIVE_andAnyCommand_shouldSetStat
 void cia402_state_machine_givenFAULT_REACTION_ACTIVE_andAnyCommand_shouldSetTransitionFAULT_REACTION_ACTIVE_TO_FAULT() {
     cia402axis.state = FAULT_REACTION_ACTIVE;
     cia402axis.transition = -1;
-    uint16_t controlword = -1;             // TODO fuzz
+    uint16_t controlword = -1;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -813,7 +831,7 @@ void cia402_state_machine_givenFAULT_REACTION_ACTIVE_andAnyCommand_shouldSetTran
 //*****************************************************************************
 void cia402_state_machine_givenFAULT_andInvalidCommand_shouldSetStateFAULT() {
     cia402axis.state = FAULT;
-    uint16_t controlword = 0;              // TODO fuzz != FAULT_RESET
+    uint16_t controlword = 0;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -822,7 +840,7 @@ void cia402_state_machine_givenFAULT_andInvalidCommand_shouldSetStateFAULT() {
 
 void cia402_state_machine_givenFAULT_andInvalidCommand_shouldSetStatuswordFAULT() {
     cia402axis.state = FAULT;
-    uint16_t controlword = 0;              // TODO fuzz != FAULT_RESET
+    uint16_t controlword = 0;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -832,7 +850,7 @@ void cia402_state_machine_givenFAULT_andInvalidCommand_shouldSetStatuswordFAULT(
 void cia402_state_machine_givenFAULT_andInvalidCommand_shouldSetTransitionNO_TRANSITION() {
     cia402axis.state = FAULT;
     cia402axis.transition = -1;
-    uint16_t controlword = 0;              // TODO fuzz != FAULT_RESET
+    uint16_t controlword = 0;
     // act
     cia402_state_machine(&cia402axis, controlword);
     // assert
@@ -878,12 +896,13 @@ int main( int argc, char **argv) {
     RUN_TEST(cia402_initialize_givenALstatusPtr_shouldSetALstatusPtr);
     RUN_TEST(cia402_initialize_givenAxis_shouldSetStateNOT_READY_TO_SWITCH_ON);
     RUN_TEST(cia402_initialize_givenAxis_shouldSetNO_TRANSITION);
-    RUN_TEST(cia402_initialize_givenAxis_shouldSetflagsTo0);
+    RUN_TEST(cia402_initialize_givenAxis_shouldClearFlags);
     RUN_TEST(cia402_initialize_givenAxis_shouldSetprevflagsTo0);
     // invalid state
     RUN_TEST(cia402_state_machine_givenAxisWithInvalidState_shouldSetStateToNOT_READY_TO_SWITCH_ON);
     RUN_TEST(cia402_state_machine_givenAxisWithInvalidState_shouldSetStatuswordToNOT_READY_TO_SWITCH_ON);
     RUN_TEST(cia402_state_machine_givenAxisWithInvalidState_shouldSetTransitionToNO_TRANSITION);
+    RUN_TEST(cia402_state_machine_givenAxisWithInvalidState_shouldClearFlags);
     // state NOT_READY_TO_SWITCH_ON
     RUN_TEST(cia402_state_machine_givenNOT_READY_TO_SWITCH_ON_andAnyCommand_shouldSetStateNOT_READY_TO_SWITCH_ON);
     RUN_TEST(cia402_state_machine_givenNOT_READY_TO_SWITCH_ON_andAnyCommand_shouldSetStatuswordNOT_READY_TO_SWITCH_ON);

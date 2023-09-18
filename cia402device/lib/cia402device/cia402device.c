@@ -25,12 +25,13 @@ void cia402_initialize(cia402_axis_t * axis, uint16_t * statusword, uint16_t * A
 void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
     *(axis->statusword) = 0x0000;
     axis->transition = NO_TRANSITION;
+    axis->prevflags = axis->flags;
 
     switch (axis->state)
     {
-    case NOT_READY_TO_SWITCH_ON: 
+    case NOT_READY_TO_SWITCH_ON:
     {
-        // automatic transition on reaching OP 
+        // automatic transition on reaching OP
         if (*(axis->ALstatus) == AL_STATUS_OP) {
             // transition 1
             axis->state = SWITCH_ON_DISABLED;
@@ -41,8 +42,8 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
         }
         break;
     }
-    
-    case SWITCH_ON_DISABLED: 
+
+    case SWITCH_ON_DISABLED:
     {
         if (IS_CIA402_COMMAND(controlword, SHUTDOWN) || *(axis->ALstatus) == AL_STATUS_OP) {
             // transition 2
@@ -54,8 +55,8 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
         }
         break;
     }
-    
-    case READY_TO_SWITCH_ON: 
+
+    case READY_TO_SWITCH_ON:
     {
         if (IS_CIA402_COMMAND(controlword, DISABLE_VOLTAGE)) {
             // transition 7
@@ -67,7 +68,7 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
             axis->state = SWITCHED_ON;
             *(axis->statusword) |= SWITCHED_ON;
             axis->transition = READY_TO_SWITCH_ON_TO_SWITCHED_ON;
-            
+    
             if (IS_CIA402_COMMAND(controlword, SWITCH_ON_ENABLE)) {
                 // transitions 3 + 4 in one command
                 axis->state = OPERATION_ENABLED;
@@ -79,8 +80,8 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
         }
         break;
     }
-    
-    case SWITCHED_ON: 
+
+    case SWITCHED_ON:
     {
         if (IS_CIA402_COMMAND(controlword, SHUTDOWN)) {
             // transition 6
@@ -102,8 +103,8 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
         }
         break;
     }
-    
-    case OPERATION_ENABLED: 
+
+    case OPERATION_ENABLED:
     {
         if (IS_CIA402_COMMAND(controlword, DISABLE_OPERATION)) {
             // transition 5
@@ -118,7 +119,7 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
             axis->transition = OPERATION_ENABLED_TO_READY_TO_SWITCH_ON;
         }
         else if (IS_CIA402_COMMAND(controlword, DISABLE_VOLTAGE)
-            || *(axis->ALstatus) != AL_STATUS_OP) { // connection lost 
+            || *(axis->ALstatus) != AL_STATUS_OP) { // connection lost
             // transition 9
             axis->state = SWITCH_ON_DISABLED;
             *(axis->statusword) |= SWITCH_ON_DISABLED;
@@ -135,8 +136,8 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
         }
         break;
     }
-    
-    case QUICK_STOP_ACTIVE: 
+
+    case QUICK_STOP_ACTIVE:
     {
         if (IS_CIA402_COMMAND(controlword, DISABLE_VOLTAGE)) {
             // transition 12
@@ -156,8 +157,8 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
         }
         break;
     }
-    
-    case FAULT_REACTION_ACTIVE: 
+
+    case FAULT_REACTION_ACTIVE:
     {
         // transition 14 is automatic
         axis->state = FAULT;
@@ -165,8 +166,8 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
         axis->transition = FAULT_REACTION_ACTIVE_TO_FAULT;
         break;
     }
-    
-    case FAULT: 
+
+    case FAULT:
     {
         if (IS_CIA402_COMMAND(controlword, FAULT_RESET)) {
             // transition 15
@@ -178,12 +179,16 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
         }
         break;
     }
-    
+
     default:
         // this should never happen, but just in case
         axis->state = NOT_READY_TO_SWITCH_ON;
         *(axis->statusword) |= NOT_READY_TO_SWITCH_ON;
         axis->transition = NO_TRANSITION;
+        axis->flags.config_allowed    = 0;
+        axis->flags.axis_func_enabled = 0;
+        axis->flags.hv_power_applied  = 0;
+        axis->flags.brake_applied     = 0;
         break;
     }
 }
