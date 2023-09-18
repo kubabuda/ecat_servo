@@ -56,6 +56,10 @@ void cia402_initialize_givenAxis_shouldSetNO_TRANSITION() {
 
 void cia402_initialize_givenAxis_shouldSetflagsTo0() {
     cia402axis.transition = -1;
+    cia402axis.flags.config_allowed    = 1;
+    cia402axis.flags.axis_func_enabled = 1;
+    cia402axis.flags.hv_power_applied  = 1;
+    cia402axis.flags.brake_applied     = 1;
     // act
     cia402_initialize(&cia402axis, &mockOD_Status_Word, &mockOD_ALstatus);
     // assert
@@ -66,6 +70,10 @@ void cia402_initialize_givenAxis_shouldSetflagsTo0() {
 }
 void cia402_initialize_givenAxis_shouldSetprevflagsTo0() {
     cia402axis.transition = -1;
+    cia402axis.prevflags.config_allowed    = 1;
+    cia402axis.prevflags.axis_func_enabled = 1;
+    cia402axis.prevflags.hv_power_applied  = 1;
+    cia402axis.prevflags.brake_applied     = 1;
     // act
     cia402_initialize(&cia402axis, &mockOD_Status_Word, &mockOD_ALstatus);
     // assert
