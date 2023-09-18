@@ -292,7 +292,6 @@ void cia402_state_machine_givenSWITCH_ON_DISABLED_anyCommandAndAL_STATUS_OP_shou
     TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.brake_applied == 1, "brake_applied should be set to 1");
 }
 
-
 void cia402_state_machine_givenSWITCH_ON_DISABLED_andSHUTDOWN_shouldSetStateREADY_TO_SWITCH_ON() {
     cia402axis.state = SWITCH_ON_DISABLED;
     *(cia402axis.ALstatus) = 0;
@@ -996,6 +995,23 @@ void cia402_state_machine_givenFAULT_REACTION_ACTIVE_andAnyCommand_shouldSetTran
     TEST_ASSERT_TRUE_MESSAGE(cia402axis.transition == FAULT_REACTION_ACTIVE_TO_FAULT, "transition should be FAULT_REACTION_ACTIVE_TO_FAULT (14)");
 }
 
+void cia402_state_machine_givenFAULT_REACTION_ACTIVE_andAnyCommand_shouldSetExpectedFlagsForFAULT() {
+    cia402axis.flags.config_allowed    = 1;
+    cia402axis.flags.axis_func_enabled = 1;
+    cia402axis.flags.hv_power_applied  = 1;
+    cia402axis.flags.brake_applied     = 1;
+    cia402axis.state = FAULT_REACTION_ACTIVE;
+    cia402axis.transition = -1;
+    uint16_t controlword = -1;
+    // act
+    cia402_state_machine(&cia402axis, controlword);
+    // assert
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.config_allowed == 1, "config_allowed should be set to 1");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.axis_func_enabled == 0, "axis_func_enabled should be set to 0");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.hv_power_applied == 0, "hv_power_applied should be set to 0");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.brake_applied == 0, "brake_applied should be set to 0");
+}
+
 //*****************************************************************************
 //                             FAULT
 //*****************************************************************************
@@ -1198,6 +1214,7 @@ int main( int argc, char **argv) {
     RUN_TEST(cia402_state_machine_givenFAULT_REACTION_ACTIVE_andAnyCommand_shouldSetStateFAULT);
     RUN_TEST(cia402_state_machine_givenFAULT_REACTION_ACTIVE_andAnyCommand_shouldSetStatuswordFAULT);
     RUN_TEST(cia402_state_machine_givenFAULT_REACTION_ACTIVE_andAnyCommand_shouldSetTransitionFAULT_REACTION_ACTIVE_TO_FAULT);
+    RUN_TEST(cia402_state_machine_givenFAULT_REACTION_ACTIVE_andAnyCommand_shouldSetExpectedFlagsForFAULT);
     
     // state FAULT
     RUN_TEST(cia402_state_machine_givenFAULT_andInvalidCommand_shouldSetStateFAULT);
