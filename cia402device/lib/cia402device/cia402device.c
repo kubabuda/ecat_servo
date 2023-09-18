@@ -195,6 +195,7 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
     switch (axis->state)
     {
     case SWITCH_ON_DISABLED:
+    case READY_TO_SWITCH_ON:
         axis->flags.config_allowed    = 1;
         axis->flags.axis_func_enabled = 0;
         axis->flags.hv_power_applied  = 0;
