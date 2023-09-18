@@ -200,6 +200,13 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
         axis->flags.axis_func_enabled = 0;
         axis->flags.hv_power_applied  = 0;
         axis->flags.brake_applied     = 1;
+        break;    
+    
+    case SWITCHED_ON:
+        axis->flags.config_allowed    = 1;
+        axis->flags.axis_func_enabled = 0;
+        axis->flags.hv_power_applied  = 1;
+        axis->flags.brake_applied     = 1;
         break;
     
     case FAULT:
