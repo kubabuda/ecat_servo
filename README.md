@@ -5,9 +5,33 @@ EtherCAT is realtime Ethernet protocol for automation. It lets you control stand
 
 This project is free implementation of CoE CiA402 standard, for use with open motor controllers like ODrive, STMBL, or your next thing. Along the way, it shows how to do EtherCAT device development using free and open source tools.
 
-# [Sources](https://github.com/kubabuda/ecat_servo/tree/main/examples/SOES_CIA402_AX58100)
 
-CiA 402 implementation [is here, complete with test coverage](https://github.com/kubabuda/ecat_servo/tree/main/cia402device)
+# [CiA 402 implementation](https://github.com/kubabuda/ecat_servo/tree/main/cia402device)
+
+Axis struct has states, transitions and action flags, its up for application to act on these.
+
+```c
+cia402_axis_t cia402axis;                           // create instance of motion control axis
+cia402_initialize(&cia402axis, &OD.Status_Word, &mockOD.ALstatus);  // initalize
+
+// ...
+while (true) {                                      // in main loop
+    // ...                                          // read PDOs from CANbus,    
+                                                    // or EtherCAT
+    cia402_state_machine(&cia402axis, controlword); // process state machine
+
+    if (axis.flags.axis_func_enabled) { /* implement your drive following command */ }
+    if (axis->flags.hv_power_applied) { /* enable HV power if applicable */ }
+    if (axis->flags.brake_applied) { /* release brake if applicable */ }
+
+    if( /* application detected error condition */ ) {
+        cia402axis.state = FAULT_REACTION_ACTIVE;    // trigger fault reaction
+        cia402_state_machine(&cia402axis, controlword); // process SM
+    }
+}
+```
+
+# [Example applications](https://github.com/kubabuda/ecat_servo/tree/main/examples/SOES_CIA402_AX58100)
 
 Example application for STM32 is [is here](https://github.com/kubabuda/ecat_servo/tree/main/examples/SOES_CIA402_AX58100)
 

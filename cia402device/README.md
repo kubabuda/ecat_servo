@@ -1,8 +1,29 @@
 # CiA 402 device
 
-This project is open source implementation of CANOpen CiA402 profile (motion control), with tests.
-Axis struct has states and transitions, its up for application to act on these.
+This project is tested open source implementation of CANOpen CiA402 profile (motion control).
+Axis struct has states, transitions and action flags, its up for application to act on these.
+
+```c
+cia402_axis_t cia402axis;                           // create instance of motion control axis
+cia402_initialize(&cia402axis, &OD.Status_Word, &mockOD.ALstatus);  // initalize
+// ...
+while (true) {                                      // in main loop
+    // ...                                          // read PDOs from CANbus, EtherCAT...
+    cia402_state_machine(&cia402axis, controlword); // process SM
+
+    if (axis.flags.axis_func_enabled) { /* implement your drive following command */ }
+    if (axis->flags.hv_power_applied) { /* enable HV power if applicable */ }
+    if (axis->flags.brake_applied) { /* release brake if applicable */ }
+
+    if(/* application detected error condition */) {
+        cia402axis.state = FAULT_REACTION_ACTIVE;  // trigger fault reaction
+        cia402_state_machine(&cia402axis, controlword); // process SM
+    }
+}
+```
+
 Unit tests can be ran natively on PC (for this one needs to [install GCC and add it to PATH](https://piolabs.com/blog/insights/unit-testing-part-2.html))
+
 
 ### TODO 
 
