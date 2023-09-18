@@ -210,6 +210,7 @@ void cia402_state_machine(cia402_axis_t * axis, uint16_t controlword) {
         break;
     
     case OPERATION_ENABLED:
+    case QUICK_STOP_ACTIVE:
         axis->flags.config_allowed    = 0;
         axis->flags.axis_func_enabled = 1;
         axis->flags.hv_power_applied  = 1;

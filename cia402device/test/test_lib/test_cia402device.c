@@ -25,7 +25,7 @@ void tearDown(void) {
 void cia402_initialize_givenstatuswordPtr_shouldSetstatuswordPtr() {
     cia402axis.state = -1;
     // act
-    cia402_initialize(&cia402axis, &mockOD_Status_Word, &mockOD_Status_Word);
+    cia402_initialize(&cia402axis, &mockOD_Status_Word, &mockOD_ALstatus);
     // assert
     TEST_ASSERT_TRUE_MESSAGE(cia402axis.statusword == &mockOD_Status_Word, "statusword pointer should be set to call parameter");
 }
@@ -930,6 +930,24 @@ void cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_AndQUICK_STOP_shou
     TEST_ASSERT_TRUE_MESSAGE(cia402axis.transition == OPERATION_ENABLED_TO_QUICK_STOP_ACTIVE, "transition should be OPERATION_ENABLED_TO_QUICK_STOP_ACTIVE (11)");
 }
 
+void cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_AndQUICK_STOP_shouldSetExpectedFlagsForQUICK_STOP_ACTIVE() {
+    cia402axis.flags.config_allowed    = 1;
+    cia402axis.flags.axis_func_enabled = 1;
+    cia402axis.flags.hv_power_applied  = 1;
+    cia402axis.flags.brake_applied     = 1;
+    cia402axis.state = OPERATION_ENABLED;
+    *(cia402axis.ALstatus) = AL_STATUS_OP;
+    cia402axis.transition = -1;
+    uint16_t controlword = CIA402_CONTROLWORD_QUICK_STOP_COMMAND;
+    // act
+    cia402_state_machine(&cia402axis, controlword);
+    // assert
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.config_allowed == 0, "config_allowed should be set to 1");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.axis_func_enabled == 1, "axis_func_enabled should be set to 0");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.hv_power_applied == 1, "hv_power_applied should be set to 1");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.brake_applied == 0, "brake_applied should be set to 1");
+}
+
 //*****************************************************************************
 //                             QUICK_STOP_ACTIVE
 //*****************************************************************************
@@ -1269,6 +1287,7 @@ int main( int argc, char **argv) {
     RUN_TEST(cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_AndQUICK_STOP_shouldSetStateQUICK_STOP_ACTIVE);
     RUN_TEST(cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_AndQUICK_STOP_shouldSetStatuswordQUICK_STOP_ACTIVE);
     RUN_TEST(cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_AndQUICK_STOP_shouldSetTransitionOPERATION_ENABLED_TO_QUICK_STOP_ACTIVE);
+    RUN_TEST(cia402_state_machine_givenOPERATION_ENABLED_AL_STATUS_OP_AndQUICK_STOP_shouldSetExpectedFlagsForQUICK_STOP_ACTIVE);
     
     // state QUICK_STOP_ACTIVE
     RUN_TEST(cia402_state_machine_givenQUICK_STOP_ACTIVE_andInvalidCommand_shouldSetStateQUICK_STOP_ACTIVE);
