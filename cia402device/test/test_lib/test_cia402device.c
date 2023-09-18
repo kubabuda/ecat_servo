@@ -489,6 +489,23 @@ void cia402_state_machine_givenREADY_TO_SWITCH_ON_andSWITCH_ON_ENABLE_shouldSetT
     TEST_ASSERT_TRUE_MESSAGE(cia402axis.transition == READY_TO_SWITCH_ON_TO_OPERATION_ENABLED, "transition should be READY_TO_SWITCH_ON_TO_OPERATION_ENABLED (34)");
 }
 
+void cia402_state_machine_givenREADY_TO_SWITCH_ON_andSWITCH_ON_ENABLE_shouldSetExpectedFlagsForOPERATION_ENABLED() {
+    cia402axis.flags.config_allowed    = 1;
+    cia402axis.flags.axis_func_enabled = 1;
+    cia402axis.flags.hv_power_applied  = 1;
+    cia402axis.flags.brake_applied     = 1;
+    cia402axis.state = READY_TO_SWITCH_ON;
+    cia402axis.transition = -1;
+    uint16_t controlword = CIA402_CONTROLWORD_SWITCH_ON_ENABLE_COMMAND;
+    // act
+    cia402_state_machine(&cia402axis, controlword);
+    // assert
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.config_allowed == 0, "config_allowed should be set to 1");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.axis_func_enabled == 1, "axis_func_enabled should be set to 0");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.hv_power_applied == 1, "hv_power_applied should be set to 1");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.brake_applied == 0, "brake_applied should be set to 1");
+}
+
 //*****************************************************************************
 //                             SWITCHED_ON
 //*****************************************************************************
@@ -591,6 +608,23 @@ void cia402_state_machine_givenSWITCHED_ON_andENABLE_OPERATION_shouldSetTransiti
     cia402_state_machine(&cia402axis, controlword);
     // assert
     TEST_ASSERT_TRUE_MESSAGE(cia402axis.transition == SWITCHED_ON_TO_OPERATION_ENABLED, "transition should be SWITCHED_ON_TO_OPERATION_ENABLED (4)");
+}
+
+void cia402_state_machine_givenSWITCHED_ON_andENABLE_OPERATION_shouldSetExpectedFlagsForOPERATION_ENABLED() {
+    cia402axis.flags.config_allowed    = 1;
+    cia402axis.flags.axis_func_enabled = 1;
+    cia402axis.flags.hv_power_applied  = 1;
+    cia402axis.flags.brake_applied     = 1;
+    cia402axis.state = SWITCHED_ON;
+    cia402axis.transition = -1;
+    uint16_t controlword = CIA402_CONTROLWORD_ENABLE_OPERATION_COMMAND;
+    // act
+    cia402_state_machine(&cia402axis, controlword);
+    // assert
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.config_allowed == 0, "config_allowed should be set to 1");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.axis_func_enabled == 1, "axis_func_enabled should be set to 0");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.hv_power_applied == 1, "hv_power_applied should be set to 1");
+    TEST_ASSERT_TRUE_MESSAGE(cia402axis.flags.brake_applied == 0, "brake_applied should be set to 1");
 }
 
 void cia402_state_machine_givenSWITCHED_ON_andDISABLE_VOLTAGE_shouldSetStateSWITCH_ON_DISABLED() {
@@ -1185,7 +1219,8 @@ int main( int argc, char **argv) {
     RUN_TEST(cia402_state_machine_givenREADY_TO_SWITCH_ON_andSWITCH_ON_ENABLE_shouldSetStateOPERATION_ENABLED);
     RUN_TEST(cia402_state_machine_givenREADY_TO_SWITCH_ON_andSWITCH_ON_ENABLE_shouldSetStatuswordOPERATION_ENABLED);
     RUN_TEST(cia402_state_machine_givenREADY_TO_SWITCH_ON_andSWITCH_ON_ENABLE_shouldSetTransitionREADY_TO_SWITCH_ON_TO_OPERATION_ENABLED);
-    
+    RUN_TEST(cia402_state_machine_givenREADY_TO_SWITCH_ON_andSWITCH_ON_ENABLE_shouldSetExpectedFlagsForOPERATION_ENABLED);
+
     // state SWITCHED_ON
     RUN_TEST(cia402_state_machine_givenSWITCHED_ON_andInvalidCommand_shouldSetStateSWITCHED_ON);
     RUN_TEST(cia402_state_machine_givenSWITCHED_ON_andInvalidCommand_shouldSetStatuswordSWITCHED_ON);
@@ -1199,7 +1234,8 @@ int main( int argc, char **argv) {
     RUN_TEST(cia402_state_machine_givenSWITCHED_ON_andENABLE_OPERATION_shouldSetStateOPERATION_ENABLED);
     RUN_TEST(cia402_state_machine_givenSWITCHED_ON_andENABLE_OPERATION_shouldSetStatuswordOPERATION_ENABLED);
     RUN_TEST(cia402_state_machine_givenSWITCHED_ON_andENABLE_OPERATION_shouldSetTransitionSWITCHED_ON_TO_OPERATION_ENABLED);
-    
+    RUN_TEST(cia402_state_machine_givenSWITCHED_ON_andENABLE_OPERATION_shouldSetExpectedFlagsForOPERATION_ENABLED);
+
     RUN_TEST(cia402_state_machine_givenSWITCHED_ON_andDISABLE_VOLTAGE_shouldSetStateSWITCH_ON_DISABLED);
     RUN_TEST(cia402_state_machine_givenSWITCHED_ON_andDISABLE_VOLTAGE_shouldSetStatuswordSWITCH_ON_DISABLED);
     RUN_TEST(cia402_state_machine_givenSWITCHED_ON_andDISABLE_VOLTAGE_shouldSetTransitionSWITCHED_ON_TO_SWITCH_ON_DISABLED);
