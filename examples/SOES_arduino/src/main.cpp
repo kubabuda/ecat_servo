@@ -49,55 +49,56 @@ static esc_cfg_t config = {
     .esc_check_dc_handler = NULL,
 };
 
-
-/* CiA402 motion control hooks declaration */
-void app_cia402_init(void);
-void app_cia402_mc(void);
-
-
-/* CiA402 motion control configuration */
-cia402_axis_t cia402axis = {
-    .state = NOT_READY_TO_SWITCH_ON,
-    .statusword = &Obj.Status_Word,
-    .ALstatus = &ESCvar.ALstatus,
-    .init_od_hook = app_cia402_init,
-    .motion_control_hook = app_cia402_mc,
-};
-
-
 const uint8_t USER_BUTTON_PIN = PB9;
+
+void esc_pdi_debug()
+{
+    // Read few core CSR registers to verify PDI is working
+    uint8_t type0x0000        = 0;
+    uint8_t rev0x0001         = 0;
+    uint8_t syncmgrscnt0x0005 = 0;
+    uint8_t ramsize0x0006     = 0;    
+                                                    // Expected for: LAN9252
+    ESC_read(0x0000, (void*) &type0x0000,        sizeof(uint8_t)); // 0xC0=192  
+    ESC_read(0x0001, (void*) &rev0x0001,         sizeof(uint8_t)); //  2
+    ESC_read(0x0005, (void*) &syncmgrscnt0x0005, sizeof(uint8_t)); //  4
+    ESC_read(0x0006, (void*) &ramsize0x0006,     sizeof(uint8_t)); //  4 [KB]
+
+    printf("\r\n[ESC debug] Type [0x0000]: %#X, Revision [0x0001]: %#X, FMMU count [0x0005]: %#X, RAM size [0x0006]: %#X \r\n", 
+        type0x0000, rev0x0001, syncmgrscnt0x0005, ramsize0x0006);
+}
+
 
 void setup() {
   pinMode(USER_BUTTON_PIN, INPUT_PULLUP);
+  pinMode(LED_BUILTIN, OUTPUT);
   Serial1.begin(SERIAL_SPEED);
-  Serial1.print("\r\nESC setup started");
+  printf("\r\nESC setup started");
 
   ecat_slv_init(&config);
-  Serial1.print("\r\nESC setup done");
-  
-  cia402_init(&cia402axis);
-  Serial1.print("\r\nCiA402 servo setup done, ready\r\n");
+  printf("\r\nESC setup done");
+  digitalWrite(LED_BUILTIN, HIGH);
+  esc_pdi_debug();
 }
 
 void loop() {
   ecat_slv();
 
   if (ESCvar.ALerror) {
-    Serial1.print("\rAL Error\r\n"); //%d", ESCvar.ALerror);
+    printf("\rAL Error\r\n"); //%d", ESCvar.ALerror);
   }
 }
 
 //---- user application ------------------------------------------------------------------------------
 
+
 void ecatapp()
 {
-  cia402_state_machine(&cia402axis, Obj.Control_Word);
-
   static uint32_t next_status_print_ms = 200;
 
   if ((digitalRead(USER_BUTTON_PIN) == LOW) & (millis() > next_status_print_ms))
   {
-    //Serial1.print("\r\nPosition %lu", Obj.Target_position);
+    printf("\r\nKey %s\r\n", "press");
     next_status_print_ms = millis() + 200;
   }
 }
@@ -105,25 +106,10 @@ void ecatapp()
 
 void cb_get_inputs()
 {
-
+  digitalWrite(LED_BUILTIN, Obj.LedIn ? LOW: HIGH);
 }
 
 void cb_set_outputs()
 {
-
+  Obj.Key1 = digitalRead(USER_BUTTON_PIN);
 }
-
-void app_cia402_init(void)
-{
-    cia402axis.ALstatus = &ESCvar.ALstatus;
-    cia402axis.statusword = &Obj.Status_Word;
-}
-
-void app_cia402_mc()
-{
-    // TODO motion control here
-    Obj.Position_actual = Obj.Target_position; // dummy loopback
-    // csp is the only supported mode
-    *(cia402axis.statusword) |= CIA402_STATUSWORD_CSP_DRIVE_FOLLOWS_COMMAND;
-}
- 

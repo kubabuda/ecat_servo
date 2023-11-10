@@ -1,0 +1,87 @@
+{
+  "form": {
+    "VendorName": "Unspecified",
+    "VendorID": "0x000",
+    "ProductCode": "0x00ab123",
+    "ProfileNo": "5001",
+    "RevisionNumber": "0x001",
+    "SerialNumber": "0x001",
+    "HWversion": "0.0.1",
+    "SWversion": "0.0.1",
+    "EEPROMsize": "2048",
+    "RxMailboxOffset": "0x1000",
+    "TxMailboxOffset": "0x1200",
+    "MailboxSize": "512",
+    "SM2Offset": "0x1600",
+    "SM3Offset": "0x1A00",
+    "TextGroupType": "DigIn",
+    "TextGroupName5": "Digital input/output",
+    "ImageName": "IMGCBY",
+    "TextDeviceType": "IODemoApp",
+    "TextDeviceName": "LAN9252 SPI demo",
+    "Port0Physical": "Y",
+    "Port1Physical": "Y",
+    "Port2Physical": " ",
+    "Port3Physical": " ",
+    "ESC": "LAN9252",
+    "SPImode": "0",
+    "CoeDetailsEnableSDO": "EnableSDO",
+    "CoeDetailsEnableSDOInfo": "EnableSDOInfo",
+    "CoeDetailsEnablePDOAssign": "EnablePDOAssign",
+    "CoeDetailsEnablePDOConfiguration": "EnablePDOConfiguration",
+    "CoeDetailsEnableUploadAtStartup": "EnableUploadAtStartup",
+    "CoeDetailsEnableSDOCompleteAccess": "EnableSDOCompleteAccess"
+  },
+  "od": {
+    "sdo": {},
+    "txpdo": {
+      "6000": {
+        "otype": "VAR",
+        "name": "Key1",
+        "access": "RO",
+        "pdo_mappings": [
+          "txpdo"
+        ],
+        "dtype": "BOOLEAN",
+        "value": "0",
+        "data": "&Obj.Key1"
+      },
+      "6001": {
+        "otype": "VAR",
+        "name": "Key2",
+        "access": "RO",
+        "pdo_mappings": [
+          "txpdo"
+        ],
+        "dtype": "BOOLEAN",
+        "value": "0",
+        "data": "&Obj.Key2"
+      },
+      "6002": {
+        "otype": "VAR",
+        "name": "Counter",
+        "access": "RO",
+        "pdo_mappings": [
+          "txpdo"
+        ],
+        "dtype": "UNSIGNED32",
+        "value": "0",
+        "data": "&Obj.Counter"
+      }
+    },
+    "rxpdo": {
+      "7000": {
+        "otype": "VAR",
+        "name": "LedIn",
+        "access": "RO",
+        "pdo_mappings": [
+          "rxpdo"
+        ],
+        "dtype": "BOOLEAN",
+        "value": "0",
+        "data": "&Obj.LedIn"
+      }
+    }
+  },
+  "dc": []
+}
