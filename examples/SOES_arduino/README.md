@@ -16,6 +16,9 @@ STM32F103 BluePill
 | SCK  |  PA5      | SCK  | D5      |
 | MISO |  PA6      | MISO | D9      |
 | MOSI |  PA7      | MOSI | D1/SIO1 |
+| UART1| 
+| TX   | PA09
+| RX   | PA10
 
 # Benchmark
 

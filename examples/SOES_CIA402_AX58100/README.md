@@ -118,3 +118,15 @@ TxPDO works at full SPI speed (41 MHz) no problem. RxPDO worked at full speed wi
 When switching to DMA, reducing CLK with prescaler >= 8 was necessary. ESC has minimal read T, that is break between PDI address + read command bytes, and following data bytes, at least 240 ns. SPL software control of SPI data block introduced sufficient delay, DMA did it back to back, without any break and it turned out to be too fast.
 After switching to read with wait state byte, SPI with prescaler 4 (that is 21 MHz) seems to work. SPI speed bumped to max still glitches. Most likely it is because of ESC not fetching valid data from memory to SPI fast enough, but maybe SPI traces routing on current PCB is not reliable at high speed? Also ESC_init doesnt wait for EEPROM to load as it should 
 Well, it still is under 20us and 21 MHz is max speed for SPI2 available on ODrive anyway so its going to be good enough.
+
+# STMBL pinout
+
+STM32 | AX58100 | 12p | 12p | AX58100 | STM32 
+______|_________|_____|_____|_________|______
+                |+24V | +5V |
+                | GND | SCK | SINT    | SWD SCK
+ PD0  |  SYNC0  | CRX | GND |
+ PD1  |  SCS    | CTX |SWDIO| SYNC1   | SWD IO
+ PB4  |  MISO   | MISO| NRST|
+ PB5  |  MOSI   | MOSI| SCK | SCLK    | PB3
+
