@@ -13,13 +13,13 @@ typedef struct
 
    /* Inputs */
 
-   int32_t CounterOut;
-   uint16_t Status_Word;
+   uint8_t Key1;
+   uint8_t Key2;
+   uint32_t Counter;
 
    /* Outputs */
 
-   uint16_t Control_Word;
-   int32_t LedIn;
+   uint8_t LedIn;
 
 } _Objects;
 

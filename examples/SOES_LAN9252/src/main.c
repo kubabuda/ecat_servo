@@ -65,7 +65,7 @@ void cb_get_inputs()
 {
     // write to slave TxPDO  
     // dummy value, so that sawtooth value profile will be seen constantly changing by ecat master 
-    Obj.CounterOut++;
+    Obj.Counter++;
 }
 
 void cb_set_outputs()
