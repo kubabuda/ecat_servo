@@ -1,5 +1,37 @@
 {
-  "form": {},
+  "form": {
+    "VendorName": "kubabuda",
+    "VendorID": "0x1337",
+    "ProductCode": "0x20192",
+    "ProfileNo": "402",
+    "RevisionNumber": "0x001",
+    "SerialNumber": "0x001",
+    "HWversion": "0.0.1",
+    "SWversion": "0.0.1",
+    "EEPROMsize": "2048",
+    "RxMailboxOffset": "0x1000",
+    "TxMailboxOffset": "0x1200",
+    "MailboxSize": "512",
+    "SM2Offset": "0x1600",
+    "SM3Offset": "0x1A00",
+    "TextGroupType": "Servodrives",
+    "TextGroupName5": "CiA402-compatible",
+    "ImageName": "IMGCBY",
+    "TextDeviceType": "AC servodrive",
+    "TextDeviceName": "STMBL ECAT",
+    "Port0Physical": "Y",
+    "Port1Physical": "Y",
+    "Port2Physical": " ",
+    "Port3Physical": " ",
+    "ESC": "AX58100",
+    "SPImode": "0",
+    "CoeDetailsEnableSDO": "EnableSDO",
+    "CoeDetailsEnableSDOInfo": "EnableSDOInfo",
+    "CoeDetailsEnablePDOAssign": "EnablePDOAssign",
+    "CoeDetailsEnablePDOConfiguration": "EnablePDOConfiguration",
+    "CoeDetailsEnableUploadAtStartup": "EnableUploadAtStartup",
+    "CoeDetailsEnableSDOCompleteAccess": "EnableSDOCompleteAccess"
+  },
   "od": {
     "sdo": {
       "1001": {
