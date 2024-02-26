@@ -25,12 +25,12 @@
     "Port3Physical": " ",
     "ESC": "AX58100",
     "SPImode": "0",
-    "CoeDetailsEnableSDO": "EnableSDO",
-    "CoeDetailsEnableSDOInfo": "EnableSDOInfo",
-    "CoeDetailsEnablePDOAssign": "EnablePDOAssign",
-    "CoeDetailsEnablePDOConfiguration": "EnablePDOConfiguration",
-    "CoeDetailsEnableUploadAtStartup": "EnableUploadAtStartup",
-    "CoeDetailsEnableSDOCompleteAccess": "EnableSDOCompleteAccess"
+    "CoeDetailsEnableSDO": true,
+    "CoeDetailsEnableSDOInfo": true,
+    "CoeDetailsEnablePDOAssign": false,
+    "CoeDetailsEnablePDOConfiguration": false,
+    "CoeDetailsEnableUploadAtStartup": true,
+    "CoeDetailsEnableSDOCompleteAccess": false
   },
   "od": {
     "sdo": {
